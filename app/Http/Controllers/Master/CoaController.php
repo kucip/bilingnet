@@ -66,6 +66,7 @@ class CoaController extends Controllermaster
 
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
+            $logo = Session::get('logo');
             $search=!empty($_GET['search'])?$_GET['search']:'';
             if($search==''){
                 $listdata=$this->model
@@ -87,8 +88,8 @@ class CoaController extends Controllermaster
                     'company' =>$compNama,
                     'name' => Session::get('name'),
                     'namelong' => Session::get('email'),
-                    'page_tittle'=> 'Master Coa',
-                    'page_active'=> 'Master Coa',
+                    'page_tittle'=> 'Master',
+                    'page_active'=> 'Coa',
                     'grid'=>$this->grid,
                     'form'=>$this->form,
                     'listdata'=> $listdata,
@@ -96,6 +97,7 @@ class CoaController extends Controllermaster
                     'mainroute' => $this->mainroute,
                     'compId' => $compId,
                     'code'=>0,
+                    'logo'=>$logo,
                     );
             return view('master.index',$data)->with('data', $data);
         }

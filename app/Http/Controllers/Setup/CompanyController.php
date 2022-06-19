@@ -87,7 +87,7 @@ class CompanyController extends BaseController
             );
             return view('login', $data);
         } else {
-
+            $logo = Session::get('logo');
             $search = !empty($_GET['search']) ? $_GET['search'] : '';
             if ($search == '') {
                 $listdata = $this->model->latest()->paginate(15);
@@ -104,14 +104,15 @@ class CompanyController extends BaseController
                 'company' => $compNama,
                 'name' => Session::get('name'),
                 'namelong' => Session::get('email'),
-                'page_tittle' => 'Master Company',
-                'page_active' => 'Master Company',
+                'page_tittle' => 'Setup',
+                'page_active' => 'Company',
                 'grid' => $this->grid,
                 'form' => $this->form,
                 'listdata' => $listdata,
                 'primaryKey' => $this->primaryKey,
                 'mainroute' => $this->mainroute,
                 'code' => 0,
+                'logo'=>$logo,
             );
             return view('setup.company', $data)->with('data', $data);
         }

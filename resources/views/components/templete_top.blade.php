@@ -64,8 +64,20 @@
 <body>
 	<!-- Main navbar -->
 	<div class="navbar navbar-expand-md navbar-dark">
-		<div class="navbar-brand wmin-200">
-			<a class="d-inline-block" href="/" style="font-size: 14px; color: white;"><span style="font-weight:bold;">{{$data['company']}}</span></a>
+		<div class="navbar-brand wmin-200" style="padding-top: 4px;padding-bottom: 4px;">
+			<table>
+				<tr>
+					<td>
+			<img src="{{$data['logo']}}" style="min-height: 40px;min-width: 40px;" class="rounded" alt="">						
+					</td>
+					<td style="padding-left: 20px;">
+			<a class="d-inline-block" href="#" style="font-size: 14px; color: white;">
+				<span style="font-weight:bold;">{{$data['company']}}</span>
+			</a>
+						
+					</td>
+				</tr>
+			</table>
 		</div>
 
 		<div class="d-md-none">
@@ -149,7 +161,7 @@
 	<div class="navbar navbar-expand-md navbar-light navbar-sticky breadcrumb-line breadcrumb-line-light header-elements-md-inline">
 		<div class="d-flex">
 			<div class="breadcrumb">
-				<a href="{{url('/')}}/dashboard" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> Home</a>
+				<a href="{{url('/')}}/dashboard" class="breadcrumb-item"><i class="icon-home4 mr-2"></i> {{$data['page_tittle'] ?? ''??''}}</a>
 				<span class="breadcrumb-item active">{{$data['page_active'] ?? ''??''}}</span>
 			</div>
 

@@ -21,6 +21,7 @@ class MainController extends Controllermaster
                 $name = Session::get('name');
                 $email = Session::get('email');
                 $compNama = Session::get('compNama');
+                $logo = Session::get('logo');
 
                 $data = array(
                         'authmenu'=>$this->getusermenu(),
@@ -29,7 +30,8 @@ class MainController extends Controllermaster
                         'namelong' => $email,
                         'tittle'=>'Home',
                         'page_tittle'=> 'Home',
-                        'page_active'=>'Home'
+                        'page_active'=>'Home',
+                        'logo'=>$logo,
                         );
 
                 return view('home',$data)->with('data', $data);

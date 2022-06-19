@@ -22,6 +22,7 @@ class DashboardController extends Controllermaster //Controller
                 $name = Session::get('name');
                 $email = Session::get('email');
                 $compNama = Session::get('compNama');
+                $logo = Session::get('logo');
 
                 $data = array(
                         'authmenu'=>$this->getusermenu(),
@@ -29,8 +30,9 @@ class DashboardController extends Controllermaster //Controller
                         'name' => $name,
                         'namelong' => $email,
                         'tittle'=>'Dashboard',
-                        'page_tittle'=> 'Biling Management',
-                        'page_active'=>'Dashboard'
+                        'page_tittle'=> 'Home',
+                        'page_active'=>'Dashboard',
+                        'logo'=>$logo,
                         );
 
                 return view('home',$data)->with('data', $data);

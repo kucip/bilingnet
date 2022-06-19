@@ -108,6 +108,7 @@ class UserController extends Controllermaster
             return view('login',$data);        
         }else{
 
+            $logo = Session::get('logo');
             $search=!empty($_GET['search'])?$_GET['search']:'';
             if($search==''){
                 $listdata=$this->model
@@ -130,14 +131,15 @@ class UserController extends Controllermaster
                     'company' =>$compNama,
                     'name' => Session::get('name'),
                     'namelong' => Session::get('email'),
-                    'page_tittle'=> 'Master User',
-                    'page_active'=> 'Master User',
+                    'page_tittle'=> 'Setup',
+                    'page_active'=> 'User',
                     'grid'=>$this->grid,
                     'form'=>$this->form,
                     'listdata'=> $listdata,
                     'primaryKey'=>$this->primaryKey,
                     'mainroute' => $this->mainroute,
                     'code'=>0,
+                    'logo'=>$logo,
                     );
             return view('setup.user',$data)->with('data', $data);
         }

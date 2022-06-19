@@ -55,6 +55,7 @@ class RoleController extends Controllermaster
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
             $search = !empty($_GET['search']) ? $_GET['search'] : '';
+            $logo = Session::get('logo');
             if ($search == '') {
                 $listdata = $this->model
                     ->latest()
@@ -72,8 +73,8 @@ class RoleController extends Controllermaster
                 'company' => $compNama,
                 'name' => Session::get('name'),
                 'namelong' => Session::get('email'),
-                'page_tittle' => 'Master Role',
-                'page_active' => 'Master Role',
+                'page_tittle' => 'Setup',
+                'page_active' => 'Role',
                 'grid' => $this->grid,
                 'form' => $this->form,
                 'listdata' => $listdata,
@@ -81,6 +82,7 @@ class RoleController extends Controllermaster
                 'mainroute' => $this->mainroute,
                 'compId' => $compId,
                 'code' => 0,
+                'logo'=>$logo,
             );
 
             return view('setup.index', $data)->with('data', $data);

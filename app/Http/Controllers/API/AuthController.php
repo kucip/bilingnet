@@ -76,6 +76,7 @@ class AuthController extends Controller
         Session::put('name',$user->name);
         Session::put('email',$user->email);
         Session::put('role',$user->role);
+        Session::put('logo',$company->compLogo);
 
         // $data = array(
         //         'authmenu'=>$this->getusermenu(),
@@ -99,6 +100,7 @@ class AuthController extends Controller
         Session::put('email','');
         Session::put('compId','');
         Session::put('role','');
+        Session::put('logo','');
 
         auth()->user()->tokens()->delete();
 

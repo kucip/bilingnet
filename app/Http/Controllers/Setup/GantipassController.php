@@ -40,6 +40,7 @@ class GantipassController extends Controllermaster
 
             $compNama = Session::get('compNama');
             $email=Session::get('email');
+            $logo = Session::get('logo');
             $data=$this->model
                   ->where('email','=',$email)
                   ->get();
@@ -80,7 +81,7 @@ class GantipassController extends Controllermaster
                     'authmenu'=>$this->getusermenu(),
                     'name' => Session::get('name'),
                     'namelong' => Session::get('email'),
-                    'page_tittle'=> 'Ganti Password',
+                    'page_tittle'=> 'Setup',
                     'page_active'=> 'Ganti Password',
                     'form'=>$formdata,
                     'listdata'=> $data,
@@ -88,6 +89,7 @@ class GantipassController extends Controllermaster
                     'primaryKeyData'=>$data[0]->id,
                     'mainroute' => $this->mainroute,
                     'code'=>0,
+                    'logo'=>$logo,
                     );
             return view('setup.gantipass',$data)->with('data', $data);
         }

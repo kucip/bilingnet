@@ -106,6 +106,7 @@ class DocsController extends Controllermaster
 
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
+            $logo = Session::get('logo');
             $search = !empty($_GET['search']) ? $_GET['search'] : '';
             if ($search == '') {
                 $listdata = $this->model
@@ -133,6 +134,7 @@ class DocsController extends Controllermaster
                 'mainroute' => $this->mainroute,
                 'compId' => $compId,
                 'code' => 0,
+                'logo'=>$logo,
             );
 
             return view('master.docs', $data)->with('data', $data);

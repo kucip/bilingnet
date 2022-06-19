@@ -40,13 +40,14 @@ class RolemenuController extends Controllermaster
 
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
+            $logo = Session::get('logo');
 
             $data = array(
                     'authmenu'=>$this->getusermenu(),
                     'company' =>$compNama,
                     'name' => Session::get('name'),
                     'namelong' => Session::get('email'),
-                    'page_tittle'=> 'Role Menu',
+                    'page_tittle'=> 'Setup',
                     'page_active'=> 'Role Menu',
                     'role'=> $this->role,
                     'menu'=> $this->menu,
@@ -55,6 +56,7 @@ class RolemenuController extends Controllermaster
                     'mainroute' => $this->mainroute,
                     'compId' => $compId,
                     'code'=>0,
+                    'logo'=>$logo,
                     );
             return view('setup.rolemenu',$data)->with('data', $data);
         }

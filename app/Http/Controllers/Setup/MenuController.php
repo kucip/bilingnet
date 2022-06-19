@@ -106,6 +106,7 @@ class MenuController extends Controllermaster
 
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
+            $logo = Session::get('logo');
             $search = !empty($_GET['search']) ? $_GET['search'] : '';
             if ($search == '') {
                 $listdata = $this->model
@@ -124,8 +125,8 @@ class MenuController extends Controllermaster
                 'authmenu' => $this->getusermenu(),
                 'name' => Session::get('name'),
                 'namelong' => Session::get('email'),
-                'page_tittle' => 'Master Menu',
-                'page_active' => 'Master Menu',
+                'page_tittle' => 'Setup',
+                'page_active' => 'Menu',
                 'grid' => $this->grid,
                 'form' => $this->form,
                 'listdata' => $listdata,
@@ -133,6 +134,7 @@ class MenuController extends Controllermaster
                 'mainroute' => $this->mainroute,
                 'compId' => $compId,
                 'code' => 0,
+                'logo'=>$logo,
             );
 
             return view('setup.index', $data)->with('data', $data);
