@@ -10,5 +10,5 @@ class Menu extends Model
     use HasFactory;
     protected $table = 'menu';
     protected $primaryKey = 'menuId';
-    protected $fillable = ['compId', 'menuNama', 'menuRoute', 'menuIcon', 'menuOrder'];
+    protected $fillable = ['compId', 'menuNama', 'menuRoute', 'menuIcon', 'menuOrder','menuParent'];
 }

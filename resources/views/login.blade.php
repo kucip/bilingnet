@@ -79,7 +79,7 @@
 	<div class="navbar navbar-expand-md navbar-dark">  
 		<div class="navbar-header">
 			<!-- <a class="navbar-brand" href="#"><img src="https://optimasolution.co.id/erp-detjolomadoe/public/assets/images/colosite.png" alt=""></a> -->
-			<a class="navbar-brand" href="#" style="font-size: 14px;"><span style="font-weight:bold;">OPTIMA TEMPLATE V2.2 </span> </a>
+			<a class="navbar-brand" href="#" style="font-size: 14px;"> <span style="font-weight:bold;">BILING.NET</span> </a>
 		</div>
 
 		<div class="navbar-collapse collapse" id="navbar-mobile">
