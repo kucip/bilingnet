@@ -1,12 +1,17 @@
 <x-templete_top :data="$data" />
 
+<style type="text/css">
+  td.number {
+      text-align: right;
+  }  
+</style>
 <div class="row">
   <div class="col-md-8">
 
     <!-- Basic layout-->
     <div class="card">
       <div class="card-header header-elements-inline">
-        <h5 class="card-title">{{$data['page_tittle']??''}}</h5>
+        <h5 class="card-title">{{$data['page_active']??''}}</h5>
         <div class="header-elements">
           <div class="list-icons">
             <form action="/{{$mainroute}}" method="GET">
@@ -55,11 +60,15 @@
                 @endphp
 
                 @foreach($grid as $datagrid)
-                @php
-                $field=$datagrid['field'];
-                $value=$data->$field;
-                @endphp
-                <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['class'] ?? ''}}">{{$value}} </td>
+                    @php
+                    $field=$datagrid['field'];
+                    $value=$data->$field;
+                    @endphp
+                    @if($datagrid['type']=='number')
+                      <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['type'] ?? ''}}">{{number_format($value)}} </td>
+                    @else
+                      <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['type'] ?? ''}}">{{$value}} </td>
+                    @endif
                 @endforeach
                 <td>
                   <center>

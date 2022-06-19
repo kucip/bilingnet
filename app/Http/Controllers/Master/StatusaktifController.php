@@ -4,49 +4,34 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controllermaster;
 use Illuminate\Http\Request;
-use App\Models\Master\Coa;
+use App\Models\Master\Statusaktif;
 use Session;
 use Input;
 
-class CoaController extends Controllermaster
+class StatusaktifController extends Controllermaster
 {
     public function __construct(){        
 
-        $this->model=new Coa;
-        $this->primaryKey='coaId';
-        $this->mainroute='coa';
+        $this->model=new Statusaktif;
+        $this->primaryKey='statId';
+        $this->mainroute='statusaktif';
         $this->mandatory=array(
                                 'compId' => 'required',
-                                'coaKode' => 'required',
-                                'coaNama' => 'required',
+                                'statNama' => 'required',
                               );
 
         $this->grid=array(
                         array(
-                                'label'=>'KODE',
-                                'field'=>'coaKode',
-                                'type'=>'text',
-                                'width'=>'20%'
-                            ),
-                        array(
                                 'label'=>'NAMA',
-                                'field'=>'coaNama',
+                                'field'=>'statNama',
                                 'type'=>'text',
                                 'width'=>''
                             ),
-
                      );
         $this->form=array(
                         array(
-                                'label'=>'KODE',
-                                'field'=>'coaKode',
-                                'type'=>'text',
-                                'placeholder'=>'Masukan Kode',
-                                'keterangan'=>'Kode Wajib Diisi'
-                            ),
-                        array(
                                 'label'=>'NAMA',
-                                'field'=>'coaNama',
+                                'field'=>'statNama',
                                 'type'=>'text',
                                 'placeholder'=>'Masukan Nama',
                                 'keterangan'=>'Nama Wajib Diisi'
@@ -72,14 +57,13 @@ class CoaController extends Controllermaster
                 $listdata=$this->model
                             ->latest()
                             ->where('compId','=',$compId)
-                            ->orderby('coaKode','asc')
+                            ->orderby('statId','asc')
                             ->paginate(15);
             }else{
                 $listdata=$this->model
-                          ->where('coaNama','like','%'.$search.'%')
-                          ->orwhere('coaKode','like','%'.$search.'%')
+                          ->where('statNama','like','%'.$search.'%')
                           ->where('compId','=',$compId)
-                          ->orderby('coaKode','asc')
+                          ->orderby('statId','asc')
                           ->paginate(15);                
             }
 
@@ -89,7 +73,7 @@ class CoaController extends Controllermaster
                     'name' => Session::get('name'),
                     'namelong' => Session::get('email'),
                     'page_tittle'=> 'Master',
-                    'page_active'=> 'Coa',
+                    'page_active'=> 'Status Aktif',
                     'grid'=>$this->grid,
                     'form'=>$this->form,
                     'listdata'=> $listdata,

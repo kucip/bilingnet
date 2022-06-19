@@ -34,8 +34,17 @@ Route::resource('gantipass', App\Http\Controllers\Setup\GantipassController::cla
 Route::resource('docs', App\Http\Controllers\Master\DocsController::class);
 Route::resource('bendahara', App\Http\Controllers\Master\BendaharaController::class);
 Route::resource('coa', App\Http\Controllers\Master\CoaController::class);
+Route::resource('paketlangganan', App\Http\Controllers\Master\PaketController::class);
+Route::resource('periodebayar', App\Http\Controllers\Master\PeriodeController::class);
+Route::resource('statusaktif', App\Http\Controllers\Master\StatusaktifController::class);
+
+//Route Pelanggan
+Route::resource('datapelanggan', App\Http\Controllers\Transaksi\PelangganController::class);
 
 // Route Autocomplete
 Route::resource('comboparent', App\Http\Controllers\Combo\Master\ComboparentController::class);
 Route::resource('comborole', App\Http\Controllers\Combo\Master\ComboroleController::class);
 Route::resource('combocoa', App\Http\Controllers\Combo\Master\CombocoaController::class);
+Route::resource('comboperiode', App\Http\Controllers\Combo\Master\ComboperiodeController::class);
+Route::resource('combopaket', App\Http\Controllers\Combo\Master\CombopaketController::class);
+Route::resource('combostatus', App\Http\Controllers\Combo\Master\CombostatusController::class);

@@ -17,7 +17,7 @@
 
 		<div class="navbar-collapse collapse" id="navbar-footer">
 			<span class="navbar-text">
-				<a href="#">PT Optima Multi Sinergi </a> &copy; 2022 
+				<a href="#">Biling.NET </a> &copy; 2022 
 			</span>
 
 			<ul class="navbar-nav ml-lg-auto">

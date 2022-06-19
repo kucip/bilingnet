@@ -4,52 +4,52 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controllermaster;
 use Illuminate\Http\Request;
-use App\Models\Master\Coa;
+use App\Models\Master\Paket;
 use Session;
 use Input;
 
-class CoaController extends Controllermaster
+class PaketController extends Controllermaster
 {
+
     public function __construct(){        
 
-        $this->model=new Coa;
-        $this->primaryKey='coaId';
-        $this->mainroute='coa';
+        $this->model=new Paket;
+        $this->primaryKey='paketId';
+        $this->mainroute='paketlangganan';
         $this->mandatory=array(
                                 'compId' => 'required',
-                                'coaKode' => 'required',
-                                'coaNama' => 'required',
+                                'paketNama' => 'required',
                               );
 
         $this->grid=array(
                         array(
-                                'label'=>'KODE',
-                                'field'=>'coaKode',
-                                'type'=>'text',
-                                'width'=>'20%'
-                            ),
-                        array(
                                 'label'=>'NAMA',
-                                'field'=>'coaNama',
+                                'field'=>'paketNama',
                                 'type'=>'text',
                                 'width'=>''
+                            ),
+                        array(
+                                'label'=>'HARGA',
+                                'field'=>'paketHarga',
+                                'type'=>'number',
+                                'width'=>'15%'
                             ),
 
                      );
         $this->form=array(
                         array(
-                                'label'=>'KODE',
-                                'field'=>'coaKode',
-                                'type'=>'text',
-                                'placeholder'=>'Masukan Kode',
-                                'keterangan'=>'Kode Wajib Diisi'
-                            ),
-                        array(
                                 'label'=>'NAMA',
-                                'field'=>'coaNama',
+                                'field'=>'paketNama',
                                 'type'=>'text',
                                 'placeholder'=>'Masukan Nama',
                                 'keterangan'=>'Nama Wajib Diisi'
+                            ),
+                        array(
+                                'label'=>'HARGA',
+                                'field'=>'paketHarga',
+                                'type'=>'number',
+                                'placeholder'=>'Masukan Harga',
+                                'keterangan'=>'Harga Wajib Diisi'
                             ),
                      );
     }
@@ -72,14 +72,13 @@ class CoaController extends Controllermaster
                 $listdata=$this->model
                             ->latest()
                             ->where('compId','=',$compId)
-                            ->orderby('coaKode','asc')
+                            ->orderby('paketId','asc')
                             ->paginate(15);
             }else{
                 $listdata=$this->model
-                          ->where('coaNama','like','%'.$search.'%')
-                          ->orwhere('coaKode','like','%'.$search.'%')
+                          ->where('paketNama','like','%'.$search.'%')
                           ->where('compId','=',$compId)
-                          ->orderby('coaKode','asc')
+                          ->orderby('paketId','asc')
                           ->paginate(15);                
             }
 
@@ -89,7 +88,7 @@ class CoaController extends Controllermaster
                     'name' => Session::get('name'),
                     'namelong' => Session::get('email'),
                     'page_tittle'=> 'Master',
-                    'page_active'=> 'Coa',
+                    'page_active'=> 'Paket Langganan',
                     'grid'=>$this->grid,
                     'form'=>$this->form,
                     'listdata'=> $listdata,
@@ -102,4 +101,6 @@ class CoaController extends Controllermaster
             return view('master.index',$data)->with('data', $data);
         }
     }
+
+
 }

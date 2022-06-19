@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controllermaster;
 use Illuminate\Http\Request;
-use App\Models\Bendahara;
+use App\Models\Master\Bendahara;
 use Session;
 
 class BendaharaController extends Controllermaster
@@ -40,7 +40,6 @@ class BendaharaController extends Controllermaster
     }
 
     public function index(){
-
         if(trim(Session::get('email'))=='' or $this->checkRouteAuth()==2){
             $wallidx=rand(1,7);
             $data = array(
@@ -52,19 +51,19 @@ class BendaharaController extends Controllermaster
 
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
-            $search=!empty($_GET['search'])?$_GET['search']:'';
             $logo = Session::get('logo');
-
+            $search=!empty($_GET['search'])?$_GET['search']:'';
             if($search==''){
                 $listdata=$this->model
                             ->latest()
                             ->where('compId','=',$compId)
+                            ->orderby('bendId','asc')
                             ->paginate(15);
             }else{
                 $listdata=$this->model
                           ->where('bendNama','like','%'.$search.'%')
                           ->where('compId','=',$compId)
-                          ->latest()
+                          ->orderby('periodId','asc')
                           ->paginate(15);                
             }
 
@@ -86,7 +85,5 @@ class BendaharaController extends Controllermaster
                     );
             return view('master.index',$data)->with('data', $data);
         }
-
-
     }
 }

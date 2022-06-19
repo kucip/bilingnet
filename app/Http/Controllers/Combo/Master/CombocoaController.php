@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Combo\Master;
 
 use App\Http\Controllers\Controllercombo;
-use App\Models\Coa;
+use App\Models\Master\Coa;
 
 class CombocoaController extends Controllercombo
 {
