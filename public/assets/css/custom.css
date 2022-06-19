@@ -1,0 +1,38 @@
+/* .navbar-dark {
+	background-color: #004b94;
+	border-color: #004b94;
+} */
+
+th {
+          text-align: center;
+          background-color: #f7f7f7;
+
+}
+
+.table th {
+          padding: 0.40rem 1.00rem;
+}
+
+.table td {
+          padding: 0.30rem 0.30rem;
+}
+
+textarea {
+          resize: none;
+}
+
+.angka {
+          text-align: right;
+}
+
+td .angka {
+          text-align: right;
+}
+
+.center {
+          text-align: center;
+}
+
+td .center {
+          text-align: center;
+}
