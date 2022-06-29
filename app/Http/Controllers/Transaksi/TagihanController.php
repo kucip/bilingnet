@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaksi\Tagihan;
 use Session;
 use Input;
+use App\Models\Transaksi\Pelanggan;
 
 
 class TagihanController extends Controllermaster
@@ -128,9 +129,26 @@ class TagihanController extends Controllermaster
     }
 
     public function createTagihan(){    	
+
+        $compId = Session::get('compId');
+
     	$periode=$_POST['tagPeriode'];
     	$bulan=$_POST['tagBulan'];
     	$tahun=$_POST['tagTahun'];
+        $pelanggan=new Pelanggan;
+        $datapelanggan=$pelanggan
+                        ->where('pelPeriodeBayar','=',$periode)
+                        ->latest()
+                        ->get();
+
+        foreach ($datapelanggan as $key => $val) {
+            $pelId=$val->pelId;
+            $pelNama=$val->pelNama;
+            $pelUserId=$val->pelUserId;
+            $pelPaket=$val->pelPaket;
+            $pelAktif=$val->pelAktif;
+        }
+
     }
 
 }
