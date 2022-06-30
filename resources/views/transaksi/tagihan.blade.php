@@ -43,7 +43,7 @@
                 @foreach($grid as $datagrid)
                 <th width="{{$datagrid['width']}}">{{$datagrid['label']}}</th>
                 @endforeach
-                <th width="8%">ACTION</th>
+                <th width="8%">DEL</th>
               </tr>
             </thead>
             <tbody>
@@ -65,15 +65,15 @@
                     $value=$data->$field;
                     @endphp
                     @if($datagrid['type']=='number')
-                      <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['type'] ?? ''}}">{{number_format($value)}} </td>
+                        <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['type'] ?? ''}}">{{number_format($value)}} </td>
                     @else
-                      <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['type'] ?? ''}}">{{$value}} </td>
+                        <td width="{{$datagrid['width'] ?? ''}}" class="{{$datagrid['type'] ?? ''}}">{{$value}} </td>
                     @endif
                 @endforeach
                 <td>
                   <center>
                     <input type="hidden" id="gridPmKey{{$rowIndex}}" name="gridPmKey{{$rowIndex}}" value="{{$pmKey}}">
-                    <a onclick="grid_edit({{$pmKey}},{{$primaryKey}})" style=" color: green; padding:4px;max-width: 30px;max-height: 30px;"><i class="icon-pencil" aria-hidden="true"></i></a>
+                    <!-- <a onclick="grid_edit({{$pmKey}},{{$primaryKey}})" style=" color: green; padding:4px;max-width: 30px;max-height: 30px;"><i class="icon-pencil" aria-hidden="true"></i></a> -->
                     <a onclick="grid_delete({{$pmKey}},{{$primaryKey}})" style="color: red; padding:4px;max-width: 30px;max-height: 30px;"><i class="icon-trash" aria-hidden="true"></i></a>
                   </center>
                 </td>
@@ -344,16 +344,15 @@
       dataType: "json",
       async: false,
       success: function(data) {
-        console.log(data);
-        // if (data.status == 401) {
-        //   alertify.error('Form Wajib Harus diisi');
-        //   return;
-        // } else {
-        //   alertify.success('Berhasil Disimpan');
-        //   setTimeout(function() {
-        //     window.open("{{$mainroute}}", "_self");
-        //   }, 500);
-        // }
+        if (data.status == 401) {
+          alertify.error('Form Wajib Harus diisi');
+          return;
+        } else {
+          alertify.success('Berhasil Disimpan');
+          setTimeout(function() {
+            window.open("{{$mainroute}}", "_self");
+          }, 500);
+        }
       },
       error: function(dataerror) {
         console.log(dataerror);
