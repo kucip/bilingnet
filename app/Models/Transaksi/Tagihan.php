@@ -10,5 +10,5 @@ class Tagihan extends Model
     use HasFactory;
     protected $table = 'trtagihan';
     protected $primaryKey = 'tagId';
-    protected $fillable = ['compId','tagPeriode','tagBulan','tagBulanNama','tagTahun','tagPelanggan','tagPelangganNama','tagPaket','tagTagihan','tagBayar','tagSisa'];
+    protected $fillable = ['compId','tagPeriode','tagBulan','tagBulanNama','tagTahun','tagPelanggan','tagPelangganNama','tagPaket','tagTagihan','tagBayar','tagSisa','tagBendahara','tagStatus','tagKeterangan'];
 }

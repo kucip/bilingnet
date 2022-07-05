@@ -19,59 +19,84 @@
 </style>
 <div class="row">
   <div class="col-md-8">
-
-    <!-- Basic layout-->
     <div class="card">
+      <!-- <form action="/{{$mainroute}}" method="GET"> -->
       <div class="card-header header-elements-inline">
-        <h5 class="card-title">{{$data['page_active']??''}}</h5>
-        <h5 class="card-title">
-              <select name="filterPeriode" id="filterPeriode" class="form-control" onchange="load_filter()">
-                <option value="0">Filter Periode</option>
-                @foreach($filterPeriode as $key => $combodata)
-                <option value="{{$combodata->comboValue}}">{{$combodata->comboLabel}}</option>
-                @endforeach
-              </select>          
-        </h5>
-        <h5 class="card-title">
-              <select name="filterBulan" id="filterBulan" class="form-control" onchange="load_filter()">
+        <!-- <h5 class="card-title">{{$data['page_active']??''}}</h5> -->
+            <div class="col-md-3">
+              <h5 class="card-title">
+                    <select name="filterPeriode" id="filterPeriode" class="form-control" onchange="searchfilter()">
+                      <option value="0">Filter Periode</option>
+                      @foreach($filterPeriode as $key => $combodata)
+                      <option value="{{$combodata->comboValue}}" 
+
+                            @if($vperiode==$combodata->comboValue) 
+                              {{"selected"}} 
+                            @endif 
+
+                      >{{$combodata->comboLabel}}</option>
+                      @endforeach
+                    </select>          
+              </h5>
+            </div>
+            <div class="col-md-2">
+            <h5 class="card-title">
+              <select name="filterBulan" id="filterBulan" class="form-control" onchange="searchfilter()">
                 <option value="0">Filter Bulan</option>
                 @foreach($filterBulan as $key => $combodata)
-                <option value="{{$combodata->comboValue}}">{{$combodata->comboLabel}}</option>
+                <option value="{{$combodata->comboValue}}"
+                      @if($vbulan==$combodata->comboValue) 
+                        {{"selected"}} 
+                      @endif 
+                >{{$combodata->comboLabel}}</option>
                 @endforeach
               </select>                    
-        </h5>
-        <h5 class="card-title">
-              <select name="filterTahun" id="filterTahun" class="form-control" onchange="load_filter()">
+            </h5>
+            </div>
+            <div class="col-md-2">
+            <h5 class="card-title">
+              <select name="filterTahun" id="filterTahun" class="form-control" onchange="searchfilter()">
                 <option value="0">Filter Tahun</option>
                 @foreach($filterTahun as $key => $combodata)
-                <option value="{{$combodata->comboValue}}">{{$combodata->comboLabel}}</option>
+                <option value="{{$combodata->comboValue}}" 
+                      @if($vtahun==$combodata->comboValue) 
+                        {{"selected"}} 
+                      @endif 
+                >{{$combodata->comboLabel}}</option>
                 @endforeach
               </select>                    
-        </h5>
+            </h5>
+            </div>  
+            <div class="col-md-5" style="padding-top: 8px;padding-right: 0px;">
+                <div class="header-elements">
+                  <div class="list-icons">
+                      <div class="form-group row">
+                        <div class="input-group">
+                          <input type="text" name="search" id="search" value="{{$vkeyword ?? ''}}" class="form-control" placeholder="Search Here" >
+                          <span class="input-group-append">
+                            <span class="input-group-text" onclick="searchfilter()"><i class="icon-search4" onclick="searchfilter()"></i></span>
+                          </span>
+                        </div>
+                      </div>
 
-        <div class="header-elements">
-          <div class="list-icons">
-            <form action="/{{$mainroute}}" method="GET">
-              <div class="form-group row">
-                <div class="input-group">
-                  <input type="text" name="search" id="search" value="{{$search ?? ''}}" class="form-control" placeholder="Search Here">
-                  <span class="input-group-append">
-                    <span class="input-group-text"><i class="icon-search4"></i></span>
-                    <span class="input-group-text">
-                      <a class="list-icons-item" data-action="collapse"></a>
-                    </span>
-                  </span>
+                      <script type="text/javascript">
+                            var input = document.getElementById("search");
+                            input.addEventListener("keypress", function(event) {
+                              if (event.key === "Enter") {
+                                searchfilter();
+                              }
+                            });                        
+                      </script>
+
+                    <!-- <a class="list-icons-item" data-action="collapse"></a>
+                    <a class="list-icons-item" data-action="reload"></a> -->
+                    <!-- <a class="list-icons-item" data-action="remove"></a> -->
+                  </div>
                 </div>
-              </div>
-            </form>
-            <!-- <a class="list-icons-item" data-action="collapse"></a>
-            <a class="list-icons-item" data-action="reload"></a> -->
-            <!-- <a class="list-icons-item" data-action="remove"></a> -->
-          </div>
-        </div>
+            </div>
       </div>
-
-      <div class="card-body">
+      <!-- </form> -->
+        <div class="card-body">
         <div class="table-responsive">
           <table id="tData" class="table table-striped table-bordered table-hover" style="width:100%">
             <thead>
@@ -127,31 +152,22 @@
 
           </table>
         </div>
+
         <br>
         <div class="text-right">
           {{ $listdata->appends(array('search' => $search ?? ''))->links('pagination::bootstrap-4') }}
         </div>
-      </div>
-
-
-    </div>
 
     <!-- /basic layout -->
+    </div>
+    </div>
   </div>
+
+
   <div class="col-md-4">
 
     <!-- Basic layout-->
     <div class="card">
-      <div class="card-header header-elements-inline">
-        <h5 class="card-title">Form Input</h5>
-        <div class="header-elements">
-          <div class="list-icons">
-            <a class="list-icons-item" data-action="collapse"></a>
-            <!-- <a class="list-icons-item" data-action="reload"></a>
-				                		<a class="list-icons-item" data-action="remove"></a> -->
-          </div>
-        </div>
-      </div>
 
       <div class="card-body">
         <!-- <form action="#"> -->
@@ -397,41 +413,15 @@
     // });
 
   }
-  function load_filter(){
+  function searchfilter(){
     var periode = document.getElementById('filterPeriode').value;
     var bulan = document.getElementById('filterBulan').value;
     var tahun = document.getElementById('filterTahun').value;
+    var search = document.getElementById('search').value;
 
-    var postdata = {};
-    postdata._token = document.getElementsByName('_token')[0].defaultValue;
-    postdata.compId = document.getElementById('compId').value;
-    postdata.periode=periode;
-    postdata.bulan=bulan;
-    postdata.tahun=tahun;
+    var link="?filterPeriode="+periode+"&filterBulan="+bulan+"&filterTahun="+tahun+"&search="+search;
 
-
-    $.ajax({
-      type: "POST",
-      url: "{{$route2}}",
-      data: (postdata),
-      dataType: "json",
-      async: false,
-      success: function(data) {
-        // console.log(data);
-        if (data.status == 401) {
-          alertify.error('Form Wajib Harus diisi');
-          return;
-        } else {
-          alertify.success('Berhasil Diupdate');
-          setTimeout(function() {
-            window.open("{{$mainroute}}", "_self");
-          }, 500);
-        }
-      },
-      error: function(dataerror) {
-        console.log(dataerror);
-      }
-    });
+    window.open("{{$mainroute}}"+link, "_self");
 
   }
 

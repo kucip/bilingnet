@@ -1,15 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `bilingnet` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `bilingnet`;
--- MariaDB dump 10.17  Distrib 10.4.6-MariaDB, for osx10.10 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: bilingnet
 -- ------------------------------------------------------
--- Server version	10.4.6-MariaDB
+-- Server version	8.0.29-0ubuntu0.20.04.3
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,15 +21,15 @@ USE `bilingnet`;
 
 DROP TABLE IF EXISTS `docs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `docs` (
-  `did` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `dnama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `did` int unsigned NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `dnama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,18 +47,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `failed_jobs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `uuid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,19 +76,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `menu` (
-  `menuId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `menuNama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `menuRoute` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `menuIcon` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `menuParent` int(11) DEFAULT NULL,
-  `menuOrder` int(11) DEFAULT NULL,
+  `menuId` int unsigned NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `menuNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `menuRoute` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `menuIcon` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `menuParent` int DEFAULT NULL,
+  `menuOrder` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`menuId`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +97,7 @@ CREATE TABLE `menu` (
 
 LOCK TABLES `menu` WRITE;
 /*!40000 ALTER TABLE `menu` DISABLE KEYS */;
-INSERT INTO `menu` VALUES (1,1,'Dashboard','dashboard','icon-display4',NULL,0,NULL,NULL),(2,1,'Setup','','icon-gear',NULL,1,NULL,NULL),(3,1,'Company','company','',2,1,NULL,NULL),(4,1,'Menu','menu','',2,2,NULL,NULL),(5,1,'Role','role','',2,3,NULL,NULL),(6,1,'Role Menu','rolemenu','',2,4,NULL,NULL),(7,1,'User Super','user','',2,5,NULL,NULL),(8,1,'User Company','usercomp','',2,6,NULL,NULL),(9,1,'Ganti Password','gantipass','',2,7,NULL,NULL),(10,1,'Master','','icon-database4',NULL,2,NULL,NULL),(11,1,'COA (Chart Of Account)','coa',NULL,10,5,NULL,'2022-06-19 04:23:07'),(12,1,'Dokumentasi','','icon-file-text2',NULL,3,NULL,NULL),(13,1,'Docs','docs','',12,1,NULL,NULL),(14,1,'Menu Level 2 Child','','',12,2,NULL,NULL),(15,1,'Menu Level 3','#','',14,1,NULL,NULL),(16,1,'Menu Level 3 Child','','',14,2,NULL,NULL),(17,1,'Menu Level 4','#','',16,1,NULL,NULL),(18,1,'Menu Level 4 Child','','',16,2,NULL,NULL),(19,1,'Menu Level 5','#','',18,1,NULL,NULL),(20,2,'Paket Langganan','paketlangganan',NULL,10,1,'2022-06-19 02:42:29','2022-06-19 02:52:31'),(21,2,'Periode Pembayaran','periodebayar',NULL,10,2,'2022-06-19 04:23:32','2022-06-19 04:23:32'),(22,2,'Bendahara','bendahara',NULL,10,3,'2022-06-19 04:23:57','2022-06-19 04:23:57'),(23,2,'Pelanggan',NULL,'icon-users',NULL,3,'2022-06-19 04:27:44','2022-06-19 04:27:44'),(24,2,'Data Pelanggan','datapelanggan',NULL,23,1,'2022-06-19 04:28:19','2022-06-19 04:28:19'),(25,2,'Kirim WA Notifikasi','kirimwa',NULL,23,3,'2022-06-19 04:28:48','2022-06-19 15:03:32'),(26,2,'Ipaymu','#','icon-coin-dollar',NULL,4,'2022-06-19 04:30:00','2022-06-19 04:30:00'),(27,2,'Posting Tagihan','postingtagihan',NULL,26,1,'2022-06-19 04:30:35','2022-06-19 04:31:36'),(28,2,'Cek Transaksi','cektransaksi',NULL,26,2,'2022-06-19 04:31:02','2022-06-19 04:31:02'),(29,2,'Cek Saldo','ceksaldo',NULL,26,3,'2022-06-19 04:31:27','2022-06-19 04:31:27'),(30,2,'Jurnal','#','icon-files-empty',NULL,5,'2022-06-19 04:32:50','2022-06-19 04:32:50'),(31,2,'Posting Penerimaan','postingterima',NULL,30,1,'2022-06-19 04:33:31','2022-06-19 04:33:31'),(32,2,'Posting Pengeluaran','postingkeluar',NULL,30,2,'2022-06-19 04:34:11','2022-06-19 04:34:11'),(33,2,'Laporan Jurnal Umum','laporanju',NULL,30,3,'2022-06-19 04:34:37','2022-06-19 04:34:37'),(34,2,'Laporan Rugi Laba','rugilaba',NULL,30,4,'2022-06-19 04:35:05','2022-06-19 04:35:05'),(35,2,'Laporan Per Bendahara','laporanbend',NULL,30,5,'2022-06-19 04:35:34','2022-06-19 04:35:34'),(36,2,'Laporan Tunggakan Pelanggan','tunggakan',NULL,30,6,'2022-06-19 04:36:02','2022-06-19 04:36:02'),(37,2,'Status Langganan','statusaktif',NULL,10,6,'2022-06-19 14:34:51','2022-06-19 15:05:56'),(38,2,'Create Tagihan Bulanan','tagihan',NULL,23,2,'2022-06-19 15:04:06','2022-06-26 13:00:45'),(39,2,'Pembayaran Pelanggan','pelangganbayar',NULL,23,4,'2022-06-19 15:11:52','2022-06-19 15:11:52');
+INSERT INTO `menu` VALUES (1,1,'Dashboard','dashboard','icon-display4',NULL,0,NULL,NULL),(2,1,'Setup','','icon-gear',NULL,1,NULL,NULL),(3,1,'Company','company','',2,1,NULL,NULL),(4,1,'Menu','menu','',2,2,NULL,NULL),(5,1,'Role','role','',2,3,NULL,NULL),(6,1,'Role Menu','rolemenu','',2,4,NULL,NULL),(7,1,'User Super','user','',2,5,NULL,NULL),(8,1,'User Company','usercomp','',2,6,NULL,NULL),(9,1,'Ganti Password','gantipass','',2,7,NULL,NULL),(10,1,'Master','','icon-database4',NULL,2,NULL,NULL),(11,1,'COA (Chart Of Account)','coa',NULL,10,5,NULL,'2022-06-19 04:23:07'),(12,1,'Dokumentasi','','icon-file-text2',NULL,3,NULL,NULL),(13,1,'Docs','docs','',12,1,NULL,NULL),(14,1,'Menu Level 2 Child','','',12,2,NULL,NULL),(15,1,'Menu Level 3','#','',14,1,NULL,NULL),(16,1,'Menu Level 3 Child','','',14,2,NULL,NULL),(17,1,'Menu Level 4','#','',16,1,NULL,NULL),(18,1,'Menu Level 4 Child','','',16,2,NULL,NULL),(19,1,'Menu Level 5','#','',18,1,NULL,NULL),(20,2,'Paket Langganan','paketlangganan',NULL,10,1,'2022-06-19 02:42:29','2022-06-19 02:52:31'),(21,2,'Periode Pembayaran','periodebayar',NULL,10,2,'2022-06-19 04:23:32','2022-06-19 04:23:32'),(22,2,'Bendahara','bendahara',NULL,10,3,'2022-06-19 04:23:57','2022-06-19 04:23:57'),(23,2,'Pelanggan',NULL,'icon-users',NULL,3,'2022-06-19 04:27:44','2022-06-19 04:27:44'),(24,2,'Data Pelanggan','datapelanggan',NULL,23,1,'2022-06-19 04:28:19','2022-06-19 04:28:19'),(25,2,'Kirim WA Notifikasi','kirimwa',NULL,23,3,'2022-06-19 04:28:48','2022-06-19 15:03:32'),(26,2,'Ipaymu','#','icon-coin-dollar',NULL,4,'2022-06-19 04:30:00','2022-06-19 04:30:00'),(27,2,'Posting Tagihan','postingtagihan',NULL,26,1,'2022-06-19 04:30:35','2022-06-19 04:31:36'),(28,2,'Cek Transaksi','cektransaksi',NULL,26,2,'2022-06-19 04:31:02','2022-06-19 04:31:02'),(29,2,'Cek Saldo','ceksaldo',NULL,26,3,'2022-06-19 04:31:27','2022-06-19 04:31:27'),(30,2,'Jurnal','#','icon-files-empty',NULL,5,'2022-06-19 04:32:50','2022-06-19 04:32:50'),(31,2,'Posting Penerimaan','postingterima',NULL,30,1,'2022-06-19 04:33:31','2022-06-19 04:33:31'),(32,2,'Posting Pengeluaran','postingkeluar',NULL,30,2,'2022-06-19 04:34:11','2022-06-19 04:34:11'),(33,2,'Laporan Jurnal Umum','laporanju',NULL,30,3,'2022-06-19 04:34:37','2022-06-19 04:34:37'),(34,2,'Laporan Rugi Laba','rugilaba',NULL,30,4,'2022-06-19 04:35:05','2022-06-19 04:35:05'),(35,2,'Laporan Per Bendahara','laporanbend',NULL,30,5,'2022-06-19 04:35:34','2022-06-19 04:35:34'),(36,2,'Laporan Tunggakan Pelanggan','tunggakan',NULL,30,6,'2022-06-19 04:36:02','2022-06-19 04:36:02'),(37,2,'Status Langganan','statusaktif',NULL,10,6,'2022-06-19 14:34:51','2022-06-19 15:05:56'),(38,2,'Create Tagihan Bulanan','tagihan',NULL,23,2,'2022-06-19 15:04:06','2022-06-26 13:00:45'),(39,2,'Pembayaran Pelanggan','pelangganbayar',NULL,23,4,'2022-06-19 15:11:52','2022-06-19 15:11:52'),(40,2,'Cetak Pembayaran','cetakpembayaran',NULL,23,7,'2022-07-05 13:46:12','2022-07-05 13:46:12');
 /*!40000 ALTER TABLE `menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,13 +107,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,15 +132,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `msbendahara`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `msbendahara` (
-  `bendId` int(11) NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `bendNama` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bendId` int NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `bendNama` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`bendId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +149,7 @@ CREATE TABLE `msbendahara` (
 
 LOCK TABLES `msbendahara` WRITE;
 /*!40000 ALTER TABLE `msbendahara` DISABLE KEYS */;
-INSERT INTO `msbendahara` VALUES (1,2,'Opan','2022-06-19 21:14:58','2022-06-19 21:14:58'),(2,2,'Lupus','2022-06-19 21:15:04','2022-06-19 21:15:04');
+INSERT INTO `msbendahara` VALUES (1,2,'Opan','2022-06-19 21:14:58','2022-06-19 21:14:58'),(2,2,'Lupus','2022-06-19 21:15:04','2022-06-19 21:15:04'),(3,2,'Yudhi','2022-07-05 21:29:01','2022-07-05 21:29:01'),(4,2,'Haris','2022-07-05 21:29:07','2022-07-05 21:29:07'),(5,2,'Bank BRI','2022-07-05 21:29:30','2022-07-05 21:29:30');
 /*!40000 ALTER TABLE `msbendahara` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,16 +159,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mscoa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mscoa` (
-  `coaId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `coaKode` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `coaNama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `coaId` int unsigned NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `coaKode` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `coaNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`coaId`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,16 +187,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mscompany`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mscompany` (
-  `compId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compLogo` longtext COLLATE utf8_unicode_ci NOT NULL,
-  `compNama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `compPemilik` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `compId` int unsigned NOT NULL AUTO_INCREMENT,
+  `compLogo` longtext CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `compNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `compPemilik` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`compId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,16 +215,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mspaket`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mspaket` (
-  `paketId` int(11) NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `paketNama` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `paketId` int NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `paketNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
   `paketHarga` decimal(10,0) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`paketId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,21 +243,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mspelanggan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mspelanggan` (
-  `pelId` int(11) NOT NULL AUTO_INCREMENT,
-  `compId` int(11) DEFAULT NULL,
-  `pelNama` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pelUserId` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pelAlamat` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pelNoHp` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `pelPeriodeBayar` int(11) DEFAULT NULL,
-  `pelPaket` int(11) DEFAULT NULL,
-  `pelAktif` int(11) DEFAULT NULL,
+  `pelId` int NOT NULL AUTO_INCREMENT,
+  `compId` int DEFAULT NULL,
+  `pelNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pelUserId` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pelAlamat` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pelNoHp` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `pelPeriodeBayar` int DEFAULT NULL,
+  `pelPaket` int DEFAULT NULL,
+  `pelAktif` int DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`pelId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +266,7 @@ CREATE TABLE `mspelanggan` (
 
 LOCK TABLES `mspelanggan` WRITE;
 /*!40000 ALTER TABLE `mspelanggan` DISABLE KEYS */;
-INSERT INTO `mspelanggan` VALUES (1,2,'Nani','nura','Empang','085238474343',2,4,2,'2022-06-19 22:43:40','2022-06-19 22:43:40'),(2,2,'Abidatul','abidatul','Jotang','082340679856',1,1,1,'2022-06-19 22:56:20','2022-06-19 22:56:20');
+INSERT INTO `mspelanggan` VALUES (1,2,'Nani','nura','Empang','085238474343',2,4,2,'2022-06-19 22:43:40','2022-06-19 22:43:40'),(2,2,'Abidatul','abidatul','Jotang','082340679856',1,1,1,'2022-06-19 22:56:20','2022-06-19 22:56:20'),(3,2,'Wahid Wahyuddin','wahid2','Empang - Karang Lapan','081339889095',2,3,1,'2022-06-22 14:33:04','2022-06-22 14:33:04'),(4,2,'Julianti','kayan','Empang - Karang Lapan','082339013300',2,3,1,'2022-06-22 14:34:42','2022-06-22 14:36:17'),(5,2,'Lasmini','lasmini','Jotang','087866767573',2,1,2,'2022-06-22 14:36:09','2022-06-22 14:36:09'),(6,2,'Lubis','lubis','Jotang','082342632522',2,1,2,'2022-06-22 14:42:33','2022-07-05 16:40:22');
 /*!40000 ALTER TABLE `mspelanggan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -278,15 +276,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `msperiode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `msperiode` (
-  `periodId` int(11) NOT NULL AUTO_INCREMENT,
-  `compId` int(11) DEFAULT NULL,
-  `periodNama` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `periodId` int NOT NULL AUTO_INCREMENT,
+  `compId` int DEFAULT NULL,
+  `periodNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updated_at` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`periodId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -305,15 +303,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `msstatus`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `msstatus` (
-  `statId` int(11) NOT NULL AUTO_INCREMENT,
-  `compId` int(11) DEFAULT NULL,
-  `statNama` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `statId` int NOT NULL AUTO_INCREMENT,
+  `compId` int DEFAULT NULL,
+  `statNama` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`statId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -332,13 +330,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `password_resets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -356,21 +354,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `personal_access_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `tokenable_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) unsigned NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -379,7 +377,7 @@ CREATE TABLE `personal_access_tokens` (
 
 LOCK TABLES `personal_access_tokens` WRITE;
 /*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
-INSERT INTO `personal_access_tokens` VALUES (20,'App\\Models\\User',2,'auth_token','d4aeb1728945af7f6a7a94d8baf92976ac3d63702b917e3718d611540ddbf81e','[\"*\"]',NULL,'2022-06-19 15:43:28','2022-06-19 15:43:28'),(21,'App\\Models\\User',2,'auth_token','54c1a0652aaee170833c3fe22e29dd12311eaea06c6cf6cb61199f234adebe6f','[\"*\"]',NULL,'2022-06-20 01:37:04','2022-06-20 01:37:04'),(22,'App\\Models\\User',2,'auth_token','2d51acc820f749c7be322cdd0279877639dadd60fcb2ad0bef8fec7976bd107b','[\"*\"]',NULL,'2022-06-26 10:12:26','2022-06-26 10:12:26'),(23,'App\\Models\\User',2,'auth_token','f371c06d8345e48117f0c2a1539f883fe897747cc75b8ee65061dfa22af9d731','[\"*\"]',NULL,'2022-06-26 12:24:46','2022-06-26 12:24:46'),(24,'App\\Models\\User',2,'auth_token','e6f60271f33710d0937db01af7decb68bb70c9443762f03158026576f18dee4f','[\"*\"]',NULL,'2022-06-29 07:22:01','2022-06-29 07:22:01'),(25,'App\\Models\\User',2,'auth_token','24ede7769513fff76034dd413bca69335139656d6eb5b47aa0d7204ab6da88bf','[\"*\"]',NULL,'2022-06-30 01:26:37','2022-06-30 01:26:37'),(26,'App\\Models\\User',2,'auth_token','efb41e05d2bf9ff78778f964e67e01c6e40f4937ef9ab52fa0fc379b5b45e258','[\"*\"]',NULL,'2022-07-01 13:19:10','2022-07-01 13:19:10'),(27,'App\\Models\\User',2,'auth_token','61d81056d89e1e5a58be677a70f91dd22e7bdcec45e3790c86e144237f64784e','[\"*\"]',NULL,'2022-07-01 14:50:39','2022-07-01 14:50:39');
+INSERT INTO `personal_access_tokens` VALUES (28,'App\\Models\\User',3,'auth_token','946b48beafd7a0c2fe00f6b1f41768639a0848534145979622c30b792a38faf0','[\"*\"]',NULL,'2022-07-05 09:42:49','2022-07-05 09:42:49'),(29,'App\\Models\\User',2,'auth_token','f6a079b0966b7ae82ddd081ce5ef2fe7cc516e3292a62bbe4cd5265f8d79c1ce','[\"*\"]',NULL,'2022-07-05 10:37:13','2022-07-05 10:37:13');
 /*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,15 +387,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `roleId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `roleNama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `roleId` int unsigned NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `roleNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,16 +414,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role_menu`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role_menu` (
-  `rmId` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `rmRoleId` int(11) NOT NULL,
-  `rmMenuId` int(11) NOT NULL,
+  `rmId` int unsigned NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `rmRoleId` int NOT NULL,
+  `rmMenuId` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`rmId`)
-) ENGINE=InnoDB AUTO_INCREMENT=343 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=423 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -434,7 +432,7 @@ CREATE TABLE `role_menu` (
 
 LOCK TABLES `role_menu` WRITE;
 /*!40000 ALTER TABLE `role_menu` DISABLE KEYS */;
-INSERT INTO `role_menu` VALUES (60,1,1,1,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(61,1,1,2,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(62,1,1,3,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(63,1,1,4,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(64,1,1,5,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(65,1,1,6,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(66,1,1,7,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(67,1,1,8,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(68,1,1,9,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(69,1,1,10,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(70,1,1,11,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(71,1,1,12,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(72,1,1,13,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(73,1,1,14,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(74,1,1,15,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(75,1,1,16,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(76,1,1,17,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(77,1,1,18,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(78,1,1,19,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(79,1,1,20,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(80,1,1,21,'2022-06-19 04:24:17','2022-06-19 04:24:17'),(81,1,1,22,'2022-06-19 04:24:17','2022-06-19 04:24:17'),(288,2,2,1,'2022-06-19 15:12:02','2022-06-19 15:12:02'),(289,2,2,2,'2022-06-19 15:12:02','2022-06-19 15:12:02'),(290,2,2,3,'2022-06-19 15:12:02','2022-06-19 15:12:02'),(291,2,2,4,'2022-06-19 15:12:02','2022-06-19 15:12:02'),(292,2,2,5,'2022-06-19 15:12:03','2022-06-19 15:12:03'),(293,2,2,6,'2022-06-19 15:12:03','2022-06-19 15:12:03'),(294,2,2,8,'2022-06-19 15:12:03','2022-06-19 15:12:03'),(295,2,2,9,'2022-06-19 15:12:03','2022-06-19 15:12:03'),(296,2,2,10,'2022-06-19 15:12:03','2022-06-19 15:12:03'),(297,2,2,11,'2022-06-19 15:12:03','2022-06-19 15:12:03'),(298,2,2,20,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(299,2,2,21,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(300,2,2,22,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(301,2,2,23,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(302,2,2,24,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(303,2,2,25,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(304,2,2,26,'2022-06-19 15:12:04','2022-06-19 15:12:04'),(305,2,2,27,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(306,2,2,28,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(307,2,2,29,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(308,2,2,30,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(309,2,2,31,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(310,2,2,32,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(311,2,2,33,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(312,2,2,34,'2022-06-19 15:12:05','2022-06-19 15:12:05'),(313,2,2,35,'2022-06-19 15:12:06','2022-06-19 15:12:06'),(314,2,2,36,'2022-06-19 15:12:06','2022-06-19 15:12:06'),(315,2,2,37,'2022-06-19 15:12:06','2022-06-19 15:12:06'),(316,2,2,38,'2022-06-19 15:12:06','2022-06-19 15:12:06'),(317,2,2,39,'2022-06-19 15:12:06','2022-06-19 15:12:06'),(318,2,3,1,'2022-06-19 15:12:11','2022-06-19 15:12:11'),(319,2,3,2,'2022-06-19 15:12:11','2022-06-19 15:12:11'),(320,2,3,9,'2022-06-19 15:12:11','2022-06-19 15:12:11'),(321,2,3,10,'2022-06-19 15:12:12','2022-06-19 15:12:12'),(322,2,3,11,'2022-06-19 15:12:12','2022-06-19 15:12:12'),(323,2,3,20,'2022-06-19 15:12:12','2022-06-19 15:12:12'),(324,2,3,21,'2022-06-19 15:12:12','2022-06-19 15:12:12'),(325,2,3,22,'2022-06-19 15:12:12','2022-06-19 15:12:12'),(326,2,3,23,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(327,2,3,24,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(328,2,3,25,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(329,2,3,26,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(330,2,3,27,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(331,2,3,28,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(332,2,3,29,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(333,2,3,30,'2022-06-19 15:12:13','2022-06-19 15:12:13'),(334,2,3,31,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(335,2,3,32,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(336,2,3,33,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(337,2,3,34,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(338,2,3,35,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(339,2,3,36,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(340,2,3,37,'2022-06-19 15:12:14','2022-06-19 15:12:14'),(341,2,3,38,'2022-06-19 15:12:15','2022-06-19 15:12:15'),(342,2,3,39,'2022-06-19 15:12:15','2022-06-19 15:12:15');
+INSERT INTO `role_menu` VALUES (60,1,1,1,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(61,1,1,2,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(62,1,1,3,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(63,1,1,4,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(64,1,1,5,'2022-06-19 04:24:14','2022-06-19 04:24:14'),(65,1,1,6,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(66,1,1,7,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(67,1,1,8,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(68,1,1,9,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(69,1,1,10,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(70,1,1,11,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(71,1,1,12,'2022-06-19 04:24:15','2022-06-19 04:24:15'),(72,1,1,13,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(73,1,1,14,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(74,1,1,15,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(75,1,1,16,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(76,1,1,17,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(77,1,1,18,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(78,1,1,19,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(79,1,1,20,'2022-06-19 04:24:16','2022-06-19 04:24:16'),(80,1,1,21,'2022-06-19 04:24:17','2022-06-19 04:24:17'),(81,1,1,22,'2022-06-19 04:24:17','2022-06-19 04:24:17'),(367,2,2,1,'2022-07-05 13:46:37','2022-07-05 13:46:37'),(368,2,2,2,'2022-07-05 13:46:37','2022-07-05 13:46:37'),(369,2,2,3,'2022-07-05 13:46:38','2022-07-05 13:46:38'),(370,2,2,4,'2022-07-05 13:46:38','2022-07-05 13:46:38'),(371,2,2,5,'2022-07-05 13:46:38','2022-07-05 13:46:38'),(372,2,2,6,'2022-07-05 13:46:38','2022-07-05 13:46:38'),(373,2,2,8,'2022-07-05 13:46:38','2022-07-05 13:46:38'),(374,2,2,9,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(375,2,2,10,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(376,2,2,11,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(377,2,2,20,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(378,2,2,21,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(379,2,2,22,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(380,2,2,23,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(381,2,2,24,'2022-07-05 13:46:39','2022-07-05 13:46:39'),(382,2,2,25,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(383,2,2,26,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(384,2,2,27,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(385,2,2,28,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(386,2,2,29,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(387,2,2,30,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(388,2,2,31,'2022-07-05 13:46:40','2022-07-05 13:46:40'),(389,2,2,32,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(390,2,2,33,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(391,2,2,34,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(392,2,2,35,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(393,2,2,36,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(394,2,2,37,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(395,2,2,38,'2022-07-05 13:46:41','2022-07-05 13:46:41'),(396,2,2,39,'2022-07-05 13:46:42','2022-07-05 13:46:42'),(397,2,2,40,'2022-07-05 13:46:42','2022-07-05 13:46:42'),(398,2,3,1,'2022-07-05 13:46:51','2022-07-05 13:46:51'),(399,2,3,2,'2022-07-05 13:46:51','2022-07-05 13:46:51'),(400,2,3,9,'2022-07-05 13:46:51','2022-07-05 13:46:51'),(401,2,3,10,'2022-07-05 13:46:51','2022-07-05 13:46:51'),(402,2,3,11,'2022-07-05 13:46:52','2022-07-05 13:46:52'),(403,2,3,20,'2022-07-05 13:46:52','2022-07-05 13:46:52'),(404,2,3,21,'2022-07-05 13:46:52','2022-07-05 13:46:52'),(405,2,3,22,'2022-07-05 13:46:52','2022-07-05 13:46:52'),(406,2,3,23,'2022-07-05 13:46:52','2022-07-05 13:46:52'),(407,2,3,24,'2022-07-05 13:46:53','2022-07-05 13:46:53'),(408,2,3,26,'2022-07-05 13:46:53','2022-07-05 13:46:53'),(409,2,3,27,'2022-07-05 13:46:53','2022-07-05 13:46:53'),(410,2,3,28,'2022-07-05 13:46:53','2022-07-05 13:46:53'),(411,2,3,29,'2022-07-05 13:46:53','2022-07-05 13:46:53'),(412,2,3,30,'2022-07-05 13:46:53','2022-07-05 13:46:53'),(413,2,3,31,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(414,2,3,32,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(415,2,3,33,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(416,2,3,34,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(417,2,3,35,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(418,2,3,36,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(419,2,3,37,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(420,2,3,38,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(421,2,3,39,'2022-07-05 13:46:54','2022-07-05 13:46:54'),(422,2,3,40,'2022-07-05 13:46:55','2022-07-05 13:46:55');
 /*!40000 ALTER TABLE `role_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,18 +442,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `syslog`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `syslog` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `user` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `tabel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `query` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `detail` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `compId` int NOT NULL,
+  `user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `tabel` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `query` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `detail` longtext CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -464,7 +462,7 @@ CREATE TABLE `syslog` (
 
 LOCK TABLES `syslog` WRITE;
 /*!40000 ALTER TABLE `syslog` DISABLE KEYS */;
-INSERT INTO `syslog` VALUES (1,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"updated_at\":\"2022-06-19T03:42:29.000000Z\",\"created_at\":\"2022-06-19T03:42:29.000000Z\",\"menuId\":20}','2022-06-19 02:42:29','2022-06-19 02:42:29'),(2,2,'kucip@gmail.com','menu','update','{\"_token\":\"X3Va1TAGoTgRrTnCu4xy6IYyi1S2BExjnQDJKNn2\",\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"10\"}','2022-06-19 02:50:39','2022-06-19 02:50:39'),(3,2,'kucip@gmail.com','menu','update','{\"_token\":\"X3Va1TAGoTgRrTnCu4xy6IYyi1S2BExjnQDJKNn2\",\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"10\"}','2022-06-19 02:51:29','2022-06-19 02:51:29'),(4,2,'kucip@gmail.com','menu','update','{\"_token\":\"X3Va1TAGoTgRrTnCu4xy6IYyi1S2BExjnQDJKNn2\",\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"10\"}','2022-06-19 02:52:31','2022-06-19 02:52:31'),(5,1,'siapsehat','menu','update','{\"_token\":\"woLygM80gGnfLvSheWWjPeehMmROWg4pjDwdzMsW\",\"compId\":\"1\",\"menuNama\":\"COA (Chart Of Account)\",\"menuRoute\":\"coa\",\"menuIcon\":null,\"menuOrder\":\"5\",\"menuParent\":\"10\"}','2022-06-19 04:23:07','2022-06-19 04:23:07'),(6,1,'siapsehat','menu','create','{\"compId\":\"1\",\"menuNama\":\"Periode Pembayaran\",\"menuRoute\":\"periodebayar\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"10\",\"updated_at\":\"2022-06-19T05:23:32.000000Z\",\"created_at\":\"2022-06-19T05:23:32.000000Z\",\"menuId\":21}','2022-06-19 04:23:32','2022-06-19 04:23:32'),(7,1,'siapsehat','menu','create','{\"compId\":\"1\",\"menuNama\":\"Bendahara\",\"menuRoute\":\"bendahara\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"10\",\"updated_at\":\"2022-06-19T05:23:57.000000Z\",\"created_at\":\"2022-06-19T05:23:57.000000Z\",\"menuId\":22}','2022-06-19 04:23:57','2022-06-19 04:23:57'),(8,2,'kucip@gmail.com','role','create','{\"compId\":\"2\",\"roleNama\":\"Admin\",\"updated_at\":\"2022-06-19T05:24:58.000000Z\",\"created_at\":\"2022-06-19T05:24:58.000000Z\",\"roleId\":2}','2022-06-19 04:24:58','2022-06-19 04:24:58'),(9,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Pelanggan\",\"menuRoute\":null,\"menuIcon\":\"icon-users\",\"menuOrder\":\"3\",\"menuParent\":null,\"updated_at\":\"2022-06-19T05:27:44.000000Z\",\"created_at\":\"2022-06-19T05:27:44.000000Z\",\"menuId\":23}','2022-06-19 04:27:44','2022-06-19 04:27:44'),(10,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Data Pelanggan\",\"menuRoute\":\"datapelanggan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T05:28:19.000000Z\",\"created_at\":\"2022-06-19T05:28:19.000000Z\",\"menuId\":24}','2022-06-19 04:28:19','2022-06-19 04:28:19'),(11,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Kirim WA Notifikasi\",\"menuRoute\":\"kirimwa\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T05:28:48.000000Z\",\"created_at\":\"2022-06-19T05:28:48.000000Z\",\"menuId\":25}','2022-06-19 04:28:48','2022-06-19 04:28:48'),(12,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Ipaymu\",\"menuRoute\":\"#\",\"menuIcon\":\"icon-coin-dollar\",\"menuOrder\":\"4\",\"menuParent\":null,\"updated_at\":\"2022-06-19T05:30:00.000000Z\",\"created_at\":\"2022-06-19T05:30:00.000000Z\",\"menuId\":26}','2022-06-19 04:30:00','2022-06-19 04:30:00'),(13,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Posting Tagihan ke Ipaymu\",\"menuRoute\":\"postingtagihan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"26\",\"updated_at\":\"2022-06-19T05:30:35.000000Z\",\"created_at\":\"2022-06-19T05:30:35.000000Z\",\"menuId\":27}','2022-06-19 04:30:35','2022-06-19 04:30:35'),(14,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Cek Transaksi\",\"menuRoute\":\"cektransaksi\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"26\",\"updated_at\":\"2022-06-19T05:31:02.000000Z\",\"created_at\":\"2022-06-19T05:31:02.000000Z\",\"menuId\":28}','2022-06-19 04:31:02','2022-06-19 04:31:02'),(15,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Cek Saldo\",\"menuRoute\":\"ceksaldo\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"26\",\"updated_at\":\"2022-06-19T05:31:27.000000Z\",\"created_at\":\"2022-06-19T05:31:27.000000Z\",\"menuId\":29}','2022-06-19 04:31:28','2022-06-19 04:31:28'),(16,2,'kucip@gmail.com','menu','update','{\"_token\":\"woLygM80gGnfLvSheWWjPeehMmROWg4pjDwdzMsW\",\"compId\":\"2\",\"menuNama\":\"Posting Tagihan\",\"menuRoute\":\"postingtagihan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"26\"}','2022-06-19 04:31:37','2022-06-19 04:31:37'),(17,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Jurnal\",\"menuRoute\":\"#\",\"menuIcon\":\"icon-files-empty\",\"menuOrder\":\"5\",\"menuParent\":null,\"updated_at\":\"2022-06-19T05:32:50.000000Z\",\"created_at\":\"2022-06-19T05:32:50.000000Z\",\"menuId\":30}','2022-06-19 04:32:50','2022-06-19 04:32:50'),(18,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Posting Penerimaan\",\"menuRoute\":\"postingterima\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:33:31.000000Z\",\"created_at\":\"2022-06-19T05:33:31.000000Z\",\"menuId\":31}','2022-06-19 04:33:31','2022-06-19 04:33:31'),(19,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Posting Pengeluaran\",\"menuRoute\":\"postingkeluar\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:34:11.000000Z\",\"created_at\":\"2022-06-19T05:34:11.000000Z\",\"menuId\":32}','2022-06-19 04:34:11','2022-06-19 04:34:11'),(20,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Jurnal Umum\",\"menuRoute\":\"laporanju\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:34:37.000000Z\",\"created_at\":\"2022-06-19T05:34:37.000000Z\",\"menuId\":33}','2022-06-19 04:34:37','2022-06-19 04:34:37'),(21,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Rugi Laba\",\"menuRoute\":\"rugilaba\",\"menuIcon\":null,\"menuOrder\":\"4\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:35:05.000000Z\",\"created_at\":\"2022-06-19T05:35:05.000000Z\",\"menuId\":34}','2022-06-19 04:35:05','2022-06-19 04:35:05'),(22,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Per Bendahara\",\"menuRoute\":\"laporanbend\",\"menuIcon\":null,\"menuOrder\":\"5\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:35:34.000000Z\",\"created_at\":\"2022-06-19T05:35:34.000000Z\",\"menuId\":35}','2022-06-19 04:35:34','2022-06-19 04:35:34'),(23,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Tunggakan Pelanggan\",\"menuRoute\":\"tunggakan\",\"menuIcon\":null,\"menuOrder\":\"6\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:36:02.000000Z\",\"created_at\":\"2022-06-19T05:36:02.000000Z\",\"menuId\":36}','2022-06-19 04:36:02','2022-06-19 04:36:02'),(24,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"1 User \\/ Bulan\",\"paketHarga\":\"70000\",\"updated_at\":\"2022-06-19T13:33:31.000000Z\",\"created_at\":\"2022-06-19T13:33:31.000000Z\",\"paketIdId\":1}','2022-06-19 12:33:31','2022-06-19 12:33:31'),(25,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"2 User \\/ Bulan\",\"paketHarga\":\"140000\",\"updated_at\":\"2022-06-19T13:41:41.000000Z\",\"created_at\":\"2022-06-19T13:41:41.000000Z\",\"paketIdId\":2}','2022-06-19 12:41:41','2022-06-19 12:41:41'),(26,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"3 User \\/ Bulan\",\"paketHarga\":\"180000\",\"updated_at\":\"2022-06-19T13:41:59.000000Z\",\"created_at\":\"2022-06-19T13:41:59.000000Z\",\"paketIdId\":3}','2022-06-19 12:41:59','2022-06-19 12:41:59'),(27,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"4 User \\/ Bulan\",\"paketHarga\":\"200000\",\"updated_at\":\"2022-06-19T13:42:11.000000Z\",\"created_at\":\"2022-06-19T13:42:11.000000Z\",\"paketIdId\":4}','2022-06-19 12:42:11','2022-06-19 12:42:11'),(28,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"5 User \\/ Bulan\",\"paketHarga\":\"230000\",\"updated_at\":\"2022-06-19T13:42:32.000000Z\",\"created_at\":\"2022-06-19T13:42:32.000000Z\",\"paketIdId\":5}','2022-06-19 12:42:32','2022-06-19 12:42:32'),(29,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"6 User \\/ Bulan\",\"paketHarga\":\"250000\",\"updated_at\":\"2022-06-19T13:42:47.000000Z\",\"created_at\":\"2022-06-19T13:42:47.000000Z\",\"paketIdId\":6}','2022-06-19 12:42:48','2022-06-19 12:42:48'),(30,2,'kucip@gmail.com','msperiode','create','{\"compId\":\"2\",\"periodNama\":\"Tanggal 10\",\"updated_at\":\"2022-06-19T14:10:58.000000Z\",\"created_at\":\"2022-06-19T14:10:58.000000Z\",\"periodId\":1}','2022-06-19 13:10:59','2022-06-19 13:10:59'),(31,2,'kucip@gmail.com','msperiode','create','{\"compId\":\"2\",\"periodNama\":\"Tanggal 25\",\"updated_at\":\"2022-06-19T14:11:07.000000Z\",\"created_at\":\"2022-06-19T14:11:07.000000Z\",\"periodId\":2}','2022-06-19 13:11:07','2022-06-19 13:11:07'),(32,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Opan\",\"updated_at\":\"2022-06-19T14:14:58.000000Z\",\"created_at\":\"2022-06-19T14:14:58.000000Z\",\"bendId\":1}','2022-06-19 13:14:58','2022-06-19 13:14:58'),(33,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Lupus\",\"updated_at\":\"2022-06-19T14:15:04.000000Z\",\"created_at\":\"2022-06-19T14:15:04.000000Z\",\"bendId\":2}','2022-06-19 13:15:04','2022-06-19 13:15:04'),(34,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"101\",\"coaNama\":\"Aset Lancar (KAS)\",\"updated_at\":\"2022-06-19T14:24:37.000000Z\",\"created_at\":\"2022-06-19T14:24:37.000000Z\",\"coaId\":6}','2022-06-19 13:24:38','2022-06-19 13:24:38'),(35,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"102\",\"coaNama\":\"Aset Tetap (Peralatan)\",\"updated_at\":\"2022-06-19T14:24:53.000000Z\",\"created_at\":\"2022-06-19T14:24:53.000000Z\",\"coaId\":7}','2022-06-19 13:24:53','2022-06-19 13:24:53'),(36,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"201\",\"coaNama\":\"Utang\",\"updated_at\":\"2022-06-19T14:25:05.000000Z\",\"created_at\":\"2022-06-19T14:25:05.000000Z\",\"coaId\":8}','2022-06-19 13:25:05','2022-06-19 13:25:05'),(37,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"301\",\"coaNama\":\"Kewajiban\",\"updated_at\":\"2022-06-19T14:25:14.000000Z\",\"created_at\":\"2022-06-19T14:25:14.000000Z\",\"coaId\":9}','2022-06-19 13:25:14','2022-06-19 13:25:14'),(38,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"401\",\"coaNama\":\"Pendapatan Pemasangan Baru (Biaya Pasang)\",\"updated_at\":\"2022-06-19T14:26:01.000000Z\",\"created_at\":\"2022-06-19T14:26:01.000000Z\",\"coaId\":10}','2022-06-19 13:26:01','2022-06-19 13:26:01'),(39,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"402\",\"coaNama\":\"Pendapatan Langganan Bulanan\",\"updated_at\":\"2022-06-19T14:26:16.000000Z\",\"created_at\":\"2022-06-19T14:26:16.000000Z\",\"coaId\":11}','2022-06-19 13:26:16','2022-06-19 13:26:16'),(40,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"403\",\"coaNama\":\"Pendapatan Voucher\",\"updated_at\":\"2022-06-19T14:26:28.000000Z\",\"created_at\":\"2022-06-19T14:26:28.000000Z\",\"coaId\":12}','2022-06-19 13:26:28','2022-06-19 13:26:28'),(41,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"404\",\"coaNama\":\"Pendapatan Lainnya\",\"updated_at\":\"2022-06-19T14:26:40.000000Z\",\"created_at\":\"2022-06-19T14:26:40.000000Z\",\"coaId\":13}','2022-06-19 13:26:40','2022-06-19 13:26:40'),(42,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"501\",\"coaNama\":\"Pengeluaran Biaya Pegawai Bulanan\",\"updated_at\":\"2022-06-19T14:27:05.000000Z\",\"created_at\":\"2022-06-19T14:27:05.000000Z\",\"coaId\":14}','2022-06-19 13:27:05','2022-06-19 13:27:05'),(43,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"502\",\"coaNama\":\"Pengeluaran Operasional\",\"updated_at\":\"2022-06-19T14:27:27.000000Z\",\"created_at\":\"2022-06-19T14:27:27.000000Z\",\"coaId\":15}','2022-06-19 13:27:27','2022-06-19 13:27:27'),(44,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"503\",\"coaNama\":\"Pengeluaran Ongkos Pasang\",\"updated_at\":\"2022-06-19T14:28:06.000000Z\",\"created_at\":\"2022-06-19T14:28:06.000000Z\",\"coaId\":16}','2022-06-19 13:28:06','2022-06-19 13:28:06'),(45,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"504\",\"coaNama\":\"Pengeluaran Pembelian Modem\",\"updated_at\":\"2022-06-19T14:28:18.000000Z\",\"created_at\":\"2022-06-19T14:28:18.000000Z\",\"coaId\":17}','2022-06-19 13:28:18','2022-06-19 13:28:18'),(46,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"505\",\"coaNama\":\"Pengeluaran Pembelian Kabel\",\"updated_at\":\"2022-06-19T14:28:32.000000Z\",\"created_at\":\"2022-06-19T14:28:32.000000Z\",\"coaId\":18}','2022-06-19 13:28:32','2022-06-19 13:28:32'),(47,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"506\",\"coaNama\":\"Pengeluaran Pembelian Konektor & Peralatan Kecil\",\"updated_at\":\"2022-06-19T14:29:29.000000Z\",\"created_at\":\"2022-06-19T14:29:29.000000Z\",\"coaId\":19}','2022-06-19 13:29:29','2022-06-19 13:29:29'),(48,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"507\",\"coaNama\":\"Pengeluaran Pembelian Bahan Habis Pakai\",\"updated_at\":\"2022-06-19T14:29:51.000000Z\",\"created_at\":\"2022-06-19T14:29:51.000000Z\",\"coaId\":20}','2022-06-19 13:29:51','2022-06-19 13:29:51'),(49,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"601\",\"coaNama\":\"Pembiayaan Pengeluaran (penyertaan modal ke unit usaha lain)\",\"updated_at\":\"2022-06-19T14:30:20.000000Z\",\"created_at\":\"2022-06-19T14:30:20.000000Z\",\"coaId\":21}','2022-06-19 13:30:20','2022-06-19 13:30:20'),(50,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"602\",\"coaNama\":\"Pembiayaan Penerimaan (penambahan modal & investasi)\",\"updated_at\":\"2022-06-19T14:30:43.000000Z\",\"created_at\":\"2022-06-19T14:30:43.000000Z\",\"coaId\":22}','2022-06-19 13:30:43','2022-06-19 13:30:43'),(51,2,'kucip@gmail.com','mscoa','update','{\"_token\":\"lb0IVsqlRjFwTaqlrtMT7kjYCCm9bnQ5RmykA4DW\",\"compId\":\"2\",\"coaKode\":\"502\",\"coaNama\":\"Pengeluaran Operasional (Listrik, Transportasi, dll)\"}','2022-06-19 13:31:19','2022-06-19 13:31:19'),(52,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Status\",\"menuRoute\":\"statusaktif\",\"menuIcon\":null,\"menuOrder\":\"6\",\"menuParent\":\"10\",\"updated_at\":\"2022-06-19T15:34:51.000000Z\",\"created_at\":\"2022-06-19T15:34:51.000000Z\",\"menuId\":37}','2022-06-19 14:34:51','2022-06-19 14:34:51'),(53,2,'kucip@gmail.com','msstatus','create','{\"compId\":\"2\",\"statNama\":\"Aktif\",\"updated_at\":\"2022-06-19T15:36:34.000000Z\",\"created_at\":\"2022-06-19T15:36:34.000000Z\",\"statId\":1}','2022-06-19 14:36:34','2022-06-19 14:36:34'),(54,2,'kucip@gmail.com','msstatus','create','{\"compId\":\"2\",\"statNama\":\"Tidak Aktif\",\"updated_at\":\"2022-06-19T15:36:41.000000Z\",\"created_at\":\"2022-06-19T15:36:41.000000Z\",\"statId\":2}','2022-06-19 14:36:42','2022-06-19 14:36:42'),(55,2,'kucip@gmail.com','msstatus','create','{\"compId\":\"2\",\"statNama\":\"Pemutusan\",\"updated_at\":\"2022-06-19T15:37:02.000000Z\",\"created_at\":\"2022-06-19T15:37:02.000000Z\",\"statId\":3}','2022-06-19 14:37:02','2022-06-19 14:37:02'),(56,2,'kucip@gmail.com','mspelanggan','create','{\"compId\":\"2\",\"pelNama\":\"Nani\",\"pelUserId\":\"nura\",\"pelAlamat\":\"Empang\",\"pelNoHp\":\"085238474343\",\"pelPeriodeBayar\":\"2\",\"pelPaket\":\"4\",\"pelAktif\":\"2\",\"updated_at\":\"2022-06-19T15:43:40.000000Z\",\"created_at\":\"2022-06-19T15:43:40.000000Z\",\"pelId\":1}','2022-06-19 14:43:40','2022-06-19 14:43:40'),(57,2,'kucip@gmail.com','mspelanggan','create','{\"compId\":\"2\",\"pelNama\":\"Abidatul\",\"pelUserId\":\"abidatul\",\"pelAlamat\":\"Jotang\",\"pelNoHp\":\"082340679856\",\"pelPeriodeBayar\":\"1\",\"pelPaket\":\"1\",\"pelAktif\":\"1\",\"updated_at\":\"2022-06-19T15:56:20.000000Z\",\"created_at\":\"2022-06-19T15:56:20.000000Z\",\"pelId\":2}','2022-06-19 14:56:20','2022-06-19 14:56:20'),(58,2,'kucip@gmail.com','role','create','{\"compId\":\"2\",\"roleNama\":\"User Level 1\",\"updated_at\":\"2022-06-19T15:58:00.000000Z\",\"created_at\":\"2022-06-19T15:58:00.000000Z\",\"roleId\":3}','2022-06-19 14:58:00','2022-06-19 14:58:00'),(59,2,'kucip@gmail.com','role','create','{\"compId\":\"2\",\"roleNama\":\"User Level 2\",\"updated_at\":\"2022-06-19T15:58:08.000000Z\",\"created_at\":\"2022-06-19T15:58:08.000000Z\",\"roleId\":4}','2022-06-19 14:58:08','2022-06-19 14:58:08'),(60,2,'haris@gmail.com','users','delete','{\"id\":1,\"name\":\"siapsehat\",\"email\":\"admin@siapsehat.com\",\"email_verified_at\":\"2022-06-19T03:32:45.000000Z\",\"password\":\"$2y$10$uBatLnuZ37l7Vbu3DOH4Ku8i1kqwvcr0VfkUV96bFJpgpvbX80hp6\",\"compId\":1,\"role\":1,\"created_at\":null,\"updated_at\":null}','2022-06-19 15:01:03','2022-06-19 15:01:03'),(61,2,'kucip@gmail.com','menu','update','{\"_token\":\"lb0IVsqlRjFwTaqlrtMT7kjYCCm9bnQ5RmykA4DW\",\"compId\":\"2\",\"menuNama\":\"Kirim WA Notifikasi\",\"menuRoute\":\"kirimwa\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"23\"}','2022-06-19 15:03:32','2022-06-19 15:03:32'),(62,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Create Tagihan Bulanan\",\"menuRoute\":\"createtagihan\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T16:04:06.000000Z\",\"created_at\":\"2022-06-19T16:04:06.000000Z\",\"menuId\":38}','2022-06-19 15:04:07','2022-06-19 15:04:07'),(63,2,'kucip@gmail.com','menu','update','{\"_token\":\"lb0IVsqlRjFwTaqlrtMT7kjYCCm9bnQ5RmykA4DW\",\"compId\":\"2\",\"menuNama\":\"Status Langganan\",\"menuRoute\":\"statusaktif\",\"menuIcon\":null,\"menuOrder\":\"6\",\"menuParent\":\"10\"}','2022-06-19 15:05:56','2022-06-19 15:05:56'),(64,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Pembayaran Pelanggan\",\"menuRoute\":\"pelangganbayar\",\"menuIcon\":null,\"menuOrder\":\"4\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T16:11:52.000000Z\",\"created_at\":\"2022-06-19T16:11:52.000000Z\",\"menuId\":39}','2022-06-19 15:11:52','2022-06-19 15:11:52'),(65,2,'kucip@gmail.com','menu','update','{\"_token\":\"VBicxtDdqsoK9QgtI2NSopAx2qzunEnl6O95NI6b\",\"compId\":\"2\",\"menuNama\":\"Create Tagihan Bulanan\",\"menuRoute\":\"tagihan\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"23\"}','2022-06-26 13:00:46','2022-06-26 13:00:46'),(66,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":1,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPaket\":4,\"tagTagihan\":\"0\",\"created_at\":\"2022-06-30T02:38:35.000000Z\",\"updated_at\":\"2022-06-30T02:38:35.000000Z\"}','2022-06-30 01:58:02','2022-06-30 01:58:02'),(67,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":2,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":3,\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T02:45:52.000000Z\",\"updated_at\":\"2022-06-30T02:45:52.000000Z\"}','2022-06-30 01:58:05','2022-06-30 01:58:05'),(68,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":3,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":5,\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPaket\":4,\"tagTagihan\":\"200000\",\"created_at\":\"2022-06-30T02:46:12.000000Z\",\"updated_at\":\"2022-06-30T02:46:12.000000Z\"}','2022-06-30 01:58:08','2022-06-30 01:58:08'),(69,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":4,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":5,\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T02:56:39.000000Z\",\"updated_at\":\"2022-06-30T02:56:39.000000Z\"}','2022-06-30 01:58:12','2022-06-30 01:58:12'),(70,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":5,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":1,\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPaket\":4,\"tagTagihan\":\"200000\",\"created_at\":\"2022-06-30T02:57:55.000000Z\",\"updated_at\":\"2022-06-30T02:57:55.000000Z\"}','2022-06-30 01:58:15','2022-06-30 01:58:15'),(71,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":6,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":1,\"tagBulanNama\":\"\",\"tagTahun\":2021,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T02:58:23.000000Z\",\"updated_at\":\"2022-06-30T02:58:23.000000Z\"}','2022-06-30 02:53:45','2022-06-30 02:53:45'),(72,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":7,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T03:53:53.000000Z\",\"updated_at\":\"2022-06-30T03:53:53.000000Z\"}','2022-06-30 03:04:39','2022-06-30 03:04:39'),(73,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":8,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":7,\"tagBulanNama\":\"Juli\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T04:04:14.000000Z\",\"updated_at\":\"2022-06-30T04:04:14.000000Z\"}','2022-06-30 03:05:02','2022-06-30 03:05:02'),(74,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":9,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPelangganNama\":\"\",\"tagPaket\":1,\"tagTagihan\":\"70000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-06-30T04:04:47.000000Z\",\"updated_at\":\"2022-06-30T04:04:47.000000Z\"}','2022-07-01 14:12:23','2022-07-01 14:12:23'),(75,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"tC7cEBmFEW8Mc4LUi9YeK8epbkeVJXjkp02eVQtg\",\"compId\":\"2\",\"tagPelangganNama\":\"Abidatul\",\"tagPeriode\":\"1\",\"tagBulan\":\"7\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"0\"}','2022-07-01 14:37:06','2022-07-01 14:37:06'),(76,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"tC7cEBmFEW8Mc4LUi9YeK8epbkeVJXjkp02eVQtg\",\"compId\":\"2\",\"tagPelangganNama\":\"Abidatul\",\"tagPeriode\":\"1\",\"tagBulan\":\"7\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"100\"}','2022-07-01 15:00:02','2022-07-01 15:00:02'),(77,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"tC7cEBmFEW8Mc4LUi9YeK8epbkeVJXjkp02eVQtg\",\"compId\":\"2\",\"tagPelangganNama\":\"Abidatul\",\"tagPeriode\":\"1\",\"tagBulan\":\"7\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"0\"}','2022-07-01 15:05:15','2022-07-01 15:05:15');
+INSERT INTO `syslog` VALUES (1,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"updated_at\":\"2022-06-19T03:42:29.000000Z\",\"created_at\":\"2022-06-19T03:42:29.000000Z\",\"menuId\":20}','2022-06-19 02:42:29','2022-06-19 02:42:29'),(2,2,'kucip@gmail.com','menu','update','{\"_token\":\"X3Va1TAGoTgRrTnCu4xy6IYyi1S2BExjnQDJKNn2\",\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"10\"}','2022-06-19 02:50:39','2022-06-19 02:50:39'),(3,2,'kucip@gmail.com','menu','update','{\"_token\":\"X3Va1TAGoTgRrTnCu4xy6IYyi1S2BExjnQDJKNn2\",\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"10\"}','2022-06-19 02:51:29','2022-06-19 02:51:29'),(4,2,'kucip@gmail.com','menu','update','{\"_token\":\"X3Va1TAGoTgRrTnCu4xy6IYyi1S2BExjnQDJKNn2\",\"compId\":\"2\",\"menuNama\":\"Paket Langganan\",\"menuRoute\":\"paketlangganan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"10\"}','2022-06-19 02:52:31','2022-06-19 02:52:31'),(5,1,'siapsehat','menu','update','{\"_token\":\"woLygM80gGnfLvSheWWjPeehMmROWg4pjDwdzMsW\",\"compId\":\"1\",\"menuNama\":\"COA (Chart Of Account)\",\"menuRoute\":\"coa\",\"menuIcon\":null,\"menuOrder\":\"5\",\"menuParent\":\"10\"}','2022-06-19 04:23:07','2022-06-19 04:23:07'),(6,1,'siapsehat','menu','create','{\"compId\":\"1\",\"menuNama\":\"Periode Pembayaran\",\"menuRoute\":\"periodebayar\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"10\",\"updated_at\":\"2022-06-19T05:23:32.000000Z\",\"created_at\":\"2022-06-19T05:23:32.000000Z\",\"menuId\":21}','2022-06-19 04:23:32','2022-06-19 04:23:32'),(7,1,'siapsehat','menu','create','{\"compId\":\"1\",\"menuNama\":\"Bendahara\",\"menuRoute\":\"bendahara\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"10\",\"updated_at\":\"2022-06-19T05:23:57.000000Z\",\"created_at\":\"2022-06-19T05:23:57.000000Z\",\"menuId\":22}','2022-06-19 04:23:57','2022-06-19 04:23:57'),(8,2,'kucip@gmail.com','role','create','{\"compId\":\"2\",\"roleNama\":\"Admin\",\"updated_at\":\"2022-06-19T05:24:58.000000Z\",\"created_at\":\"2022-06-19T05:24:58.000000Z\",\"roleId\":2}','2022-06-19 04:24:58','2022-06-19 04:24:58'),(9,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Pelanggan\",\"menuRoute\":null,\"menuIcon\":\"icon-users\",\"menuOrder\":\"3\",\"menuParent\":null,\"updated_at\":\"2022-06-19T05:27:44.000000Z\",\"created_at\":\"2022-06-19T05:27:44.000000Z\",\"menuId\":23}','2022-06-19 04:27:44','2022-06-19 04:27:44'),(10,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Data Pelanggan\",\"menuRoute\":\"datapelanggan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T05:28:19.000000Z\",\"created_at\":\"2022-06-19T05:28:19.000000Z\",\"menuId\":24}','2022-06-19 04:28:19','2022-06-19 04:28:19'),(11,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Kirim WA Notifikasi\",\"menuRoute\":\"kirimwa\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T05:28:48.000000Z\",\"created_at\":\"2022-06-19T05:28:48.000000Z\",\"menuId\":25}','2022-06-19 04:28:48','2022-06-19 04:28:48'),(12,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Ipaymu\",\"menuRoute\":\"#\",\"menuIcon\":\"icon-coin-dollar\",\"menuOrder\":\"4\",\"menuParent\":null,\"updated_at\":\"2022-06-19T05:30:00.000000Z\",\"created_at\":\"2022-06-19T05:30:00.000000Z\",\"menuId\":26}','2022-06-19 04:30:00','2022-06-19 04:30:00'),(13,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Posting Tagihan ke Ipaymu\",\"menuRoute\":\"postingtagihan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"26\",\"updated_at\":\"2022-06-19T05:30:35.000000Z\",\"created_at\":\"2022-06-19T05:30:35.000000Z\",\"menuId\":27}','2022-06-19 04:30:35','2022-06-19 04:30:35'),(14,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Cek Transaksi\",\"menuRoute\":\"cektransaksi\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"26\",\"updated_at\":\"2022-06-19T05:31:02.000000Z\",\"created_at\":\"2022-06-19T05:31:02.000000Z\",\"menuId\":28}','2022-06-19 04:31:02','2022-06-19 04:31:02'),(15,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Cek Saldo\",\"menuRoute\":\"ceksaldo\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"26\",\"updated_at\":\"2022-06-19T05:31:27.000000Z\",\"created_at\":\"2022-06-19T05:31:27.000000Z\",\"menuId\":29}','2022-06-19 04:31:28','2022-06-19 04:31:28'),(16,2,'kucip@gmail.com','menu','update','{\"_token\":\"woLygM80gGnfLvSheWWjPeehMmROWg4pjDwdzMsW\",\"compId\":\"2\",\"menuNama\":\"Posting Tagihan\",\"menuRoute\":\"postingtagihan\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"26\"}','2022-06-19 04:31:37','2022-06-19 04:31:37'),(17,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Jurnal\",\"menuRoute\":\"#\",\"menuIcon\":\"icon-files-empty\",\"menuOrder\":\"5\",\"menuParent\":null,\"updated_at\":\"2022-06-19T05:32:50.000000Z\",\"created_at\":\"2022-06-19T05:32:50.000000Z\",\"menuId\":30}','2022-06-19 04:32:50','2022-06-19 04:32:50'),(18,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Posting Penerimaan\",\"menuRoute\":\"postingterima\",\"menuIcon\":null,\"menuOrder\":\"1\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:33:31.000000Z\",\"created_at\":\"2022-06-19T05:33:31.000000Z\",\"menuId\":31}','2022-06-19 04:33:31','2022-06-19 04:33:31'),(19,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Posting Pengeluaran\",\"menuRoute\":\"postingkeluar\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:34:11.000000Z\",\"created_at\":\"2022-06-19T05:34:11.000000Z\",\"menuId\":32}','2022-06-19 04:34:11','2022-06-19 04:34:11'),(20,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Jurnal Umum\",\"menuRoute\":\"laporanju\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:34:37.000000Z\",\"created_at\":\"2022-06-19T05:34:37.000000Z\",\"menuId\":33}','2022-06-19 04:34:37','2022-06-19 04:34:37'),(21,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Rugi Laba\",\"menuRoute\":\"rugilaba\",\"menuIcon\":null,\"menuOrder\":\"4\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:35:05.000000Z\",\"created_at\":\"2022-06-19T05:35:05.000000Z\",\"menuId\":34}','2022-06-19 04:35:05','2022-06-19 04:35:05'),(22,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Per Bendahara\",\"menuRoute\":\"laporanbend\",\"menuIcon\":null,\"menuOrder\":\"5\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:35:34.000000Z\",\"created_at\":\"2022-06-19T05:35:34.000000Z\",\"menuId\":35}','2022-06-19 04:35:34','2022-06-19 04:35:34'),(23,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Laporan Tunggakan Pelanggan\",\"menuRoute\":\"tunggakan\",\"menuIcon\":null,\"menuOrder\":\"6\",\"menuParent\":\"30\",\"updated_at\":\"2022-06-19T05:36:02.000000Z\",\"created_at\":\"2022-06-19T05:36:02.000000Z\",\"menuId\":36}','2022-06-19 04:36:02','2022-06-19 04:36:02'),(24,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"1 User \\/ Bulan\",\"paketHarga\":\"70000\",\"updated_at\":\"2022-06-19T13:33:31.000000Z\",\"created_at\":\"2022-06-19T13:33:31.000000Z\",\"paketIdId\":1}','2022-06-19 12:33:31','2022-06-19 12:33:31'),(25,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"2 User \\/ Bulan\",\"paketHarga\":\"140000\",\"updated_at\":\"2022-06-19T13:41:41.000000Z\",\"created_at\":\"2022-06-19T13:41:41.000000Z\",\"paketIdId\":2}','2022-06-19 12:41:41','2022-06-19 12:41:41'),(26,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"3 User \\/ Bulan\",\"paketHarga\":\"180000\",\"updated_at\":\"2022-06-19T13:41:59.000000Z\",\"created_at\":\"2022-06-19T13:41:59.000000Z\",\"paketIdId\":3}','2022-06-19 12:41:59','2022-06-19 12:41:59'),(27,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"4 User \\/ Bulan\",\"paketHarga\":\"200000\",\"updated_at\":\"2022-06-19T13:42:11.000000Z\",\"created_at\":\"2022-06-19T13:42:11.000000Z\",\"paketIdId\":4}','2022-06-19 12:42:11','2022-06-19 12:42:11'),(28,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"5 User \\/ Bulan\",\"paketHarga\":\"230000\",\"updated_at\":\"2022-06-19T13:42:32.000000Z\",\"created_at\":\"2022-06-19T13:42:32.000000Z\",\"paketIdId\":5}','2022-06-19 12:42:32','2022-06-19 12:42:32'),(29,2,'kucip@gmail.com','mspaket','create','{\"compId\":\"2\",\"paketNama\":\"6 User \\/ Bulan\",\"paketHarga\":\"250000\",\"updated_at\":\"2022-06-19T13:42:47.000000Z\",\"created_at\":\"2022-06-19T13:42:47.000000Z\",\"paketIdId\":6}','2022-06-19 12:42:48','2022-06-19 12:42:48'),(30,2,'kucip@gmail.com','msperiode','create','{\"compId\":\"2\",\"periodNama\":\"Tanggal 10\",\"updated_at\":\"2022-06-19T14:10:58.000000Z\",\"created_at\":\"2022-06-19T14:10:58.000000Z\",\"periodId\":1}','2022-06-19 13:10:59','2022-06-19 13:10:59'),(31,2,'kucip@gmail.com','msperiode','create','{\"compId\":\"2\",\"periodNama\":\"Tanggal 25\",\"updated_at\":\"2022-06-19T14:11:07.000000Z\",\"created_at\":\"2022-06-19T14:11:07.000000Z\",\"periodId\":2}','2022-06-19 13:11:07','2022-06-19 13:11:07'),(32,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Opan\",\"updated_at\":\"2022-06-19T14:14:58.000000Z\",\"created_at\":\"2022-06-19T14:14:58.000000Z\",\"bendId\":1}','2022-06-19 13:14:58','2022-06-19 13:14:58'),(33,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Lupus\",\"updated_at\":\"2022-06-19T14:15:04.000000Z\",\"created_at\":\"2022-06-19T14:15:04.000000Z\",\"bendId\":2}','2022-06-19 13:15:04','2022-06-19 13:15:04'),(34,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"101\",\"coaNama\":\"Aset Lancar (KAS)\",\"updated_at\":\"2022-06-19T14:24:37.000000Z\",\"created_at\":\"2022-06-19T14:24:37.000000Z\",\"coaId\":6}','2022-06-19 13:24:38','2022-06-19 13:24:38'),(35,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"102\",\"coaNama\":\"Aset Tetap (Peralatan)\",\"updated_at\":\"2022-06-19T14:24:53.000000Z\",\"created_at\":\"2022-06-19T14:24:53.000000Z\",\"coaId\":7}','2022-06-19 13:24:53','2022-06-19 13:24:53'),(36,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"201\",\"coaNama\":\"Utang\",\"updated_at\":\"2022-06-19T14:25:05.000000Z\",\"created_at\":\"2022-06-19T14:25:05.000000Z\",\"coaId\":8}','2022-06-19 13:25:05','2022-06-19 13:25:05'),(37,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"301\",\"coaNama\":\"Kewajiban\",\"updated_at\":\"2022-06-19T14:25:14.000000Z\",\"created_at\":\"2022-06-19T14:25:14.000000Z\",\"coaId\":9}','2022-06-19 13:25:14','2022-06-19 13:25:14'),(38,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"401\",\"coaNama\":\"Pendapatan Pemasangan Baru (Biaya Pasang)\",\"updated_at\":\"2022-06-19T14:26:01.000000Z\",\"created_at\":\"2022-06-19T14:26:01.000000Z\",\"coaId\":10}','2022-06-19 13:26:01','2022-06-19 13:26:01'),(39,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"402\",\"coaNama\":\"Pendapatan Langganan Bulanan\",\"updated_at\":\"2022-06-19T14:26:16.000000Z\",\"created_at\":\"2022-06-19T14:26:16.000000Z\",\"coaId\":11}','2022-06-19 13:26:16','2022-06-19 13:26:16'),(40,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"403\",\"coaNama\":\"Pendapatan Voucher\",\"updated_at\":\"2022-06-19T14:26:28.000000Z\",\"created_at\":\"2022-06-19T14:26:28.000000Z\",\"coaId\":12}','2022-06-19 13:26:28','2022-06-19 13:26:28'),(41,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"404\",\"coaNama\":\"Pendapatan Lainnya\",\"updated_at\":\"2022-06-19T14:26:40.000000Z\",\"created_at\":\"2022-06-19T14:26:40.000000Z\",\"coaId\":13}','2022-06-19 13:26:40','2022-06-19 13:26:40'),(42,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"501\",\"coaNama\":\"Pengeluaran Biaya Pegawai Bulanan\",\"updated_at\":\"2022-06-19T14:27:05.000000Z\",\"created_at\":\"2022-06-19T14:27:05.000000Z\",\"coaId\":14}','2022-06-19 13:27:05','2022-06-19 13:27:05'),(43,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"502\",\"coaNama\":\"Pengeluaran Operasional\",\"updated_at\":\"2022-06-19T14:27:27.000000Z\",\"created_at\":\"2022-06-19T14:27:27.000000Z\",\"coaId\":15}','2022-06-19 13:27:27','2022-06-19 13:27:27'),(44,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"503\",\"coaNama\":\"Pengeluaran Ongkos Pasang\",\"updated_at\":\"2022-06-19T14:28:06.000000Z\",\"created_at\":\"2022-06-19T14:28:06.000000Z\",\"coaId\":16}','2022-06-19 13:28:06','2022-06-19 13:28:06'),(45,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"504\",\"coaNama\":\"Pengeluaran Pembelian Modem\",\"updated_at\":\"2022-06-19T14:28:18.000000Z\",\"created_at\":\"2022-06-19T14:28:18.000000Z\",\"coaId\":17}','2022-06-19 13:28:18','2022-06-19 13:28:18'),(46,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"505\",\"coaNama\":\"Pengeluaran Pembelian Kabel\",\"updated_at\":\"2022-06-19T14:28:32.000000Z\",\"created_at\":\"2022-06-19T14:28:32.000000Z\",\"coaId\":18}','2022-06-19 13:28:32','2022-06-19 13:28:32'),(47,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"506\",\"coaNama\":\"Pengeluaran Pembelian Konektor & Peralatan Kecil\",\"updated_at\":\"2022-06-19T14:29:29.000000Z\",\"created_at\":\"2022-06-19T14:29:29.000000Z\",\"coaId\":19}','2022-06-19 13:29:29','2022-06-19 13:29:29'),(48,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"507\",\"coaNama\":\"Pengeluaran Pembelian Bahan Habis Pakai\",\"updated_at\":\"2022-06-19T14:29:51.000000Z\",\"created_at\":\"2022-06-19T14:29:51.000000Z\",\"coaId\":20}','2022-06-19 13:29:51','2022-06-19 13:29:51'),(49,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"601\",\"coaNama\":\"Pembiayaan Pengeluaran (penyertaan modal ke unit usaha lain)\",\"updated_at\":\"2022-06-19T14:30:20.000000Z\",\"created_at\":\"2022-06-19T14:30:20.000000Z\",\"coaId\":21}','2022-06-19 13:30:20','2022-06-19 13:30:20'),(50,2,'kucip@gmail.com','mscoa','create','{\"compId\":\"2\",\"coaKode\":\"602\",\"coaNama\":\"Pembiayaan Penerimaan (penambahan modal & investasi)\",\"updated_at\":\"2022-06-19T14:30:43.000000Z\",\"created_at\":\"2022-06-19T14:30:43.000000Z\",\"coaId\":22}','2022-06-19 13:30:43','2022-06-19 13:30:43'),(51,2,'kucip@gmail.com','mscoa','update','{\"_token\":\"lb0IVsqlRjFwTaqlrtMT7kjYCCm9bnQ5RmykA4DW\",\"compId\":\"2\",\"coaKode\":\"502\",\"coaNama\":\"Pengeluaran Operasional (Listrik, Transportasi, dll)\"}','2022-06-19 13:31:19','2022-06-19 13:31:19'),(52,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Status\",\"menuRoute\":\"statusaktif\",\"menuIcon\":null,\"menuOrder\":\"6\",\"menuParent\":\"10\",\"updated_at\":\"2022-06-19T15:34:51.000000Z\",\"created_at\":\"2022-06-19T15:34:51.000000Z\",\"menuId\":37}','2022-06-19 14:34:51','2022-06-19 14:34:51'),(53,2,'kucip@gmail.com','msstatus','create','{\"compId\":\"2\",\"statNama\":\"Aktif\",\"updated_at\":\"2022-06-19T15:36:34.000000Z\",\"created_at\":\"2022-06-19T15:36:34.000000Z\",\"statId\":1}','2022-06-19 14:36:34','2022-06-19 14:36:34'),(54,2,'kucip@gmail.com','msstatus','create','{\"compId\":\"2\",\"statNama\":\"Tidak Aktif\",\"updated_at\":\"2022-06-19T15:36:41.000000Z\",\"created_at\":\"2022-06-19T15:36:41.000000Z\",\"statId\":2}','2022-06-19 14:36:42','2022-06-19 14:36:42'),(55,2,'kucip@gmail.com','msstatus','create','{\"compId\":\"2\",\"statNama\":\"Pemutusan\",\"updated_at\":\"2022-06-19T15:37:02.000000Z\",\"created_at\":\"2022-06-19T15:37:02.000000Z\",\"statId\":3}','2022-06-19 14:37:02','2022-06-19 14:37:02'),(56,2,'kucip@gmail.com','mspelanggan','create','{\"compId\":\"2\",\"pelNama\":\"Nani\",\"pelUserId\":\"nura\",\"pelAlamat\":\"Empang\",\"pelNoHp\":\"085238474343\",\"pelPeriodeBayar\":\"2\",\"pelPaket\":\"4\",\"pelAktif\":\"2\",\"updated_at\":\"2022-06-19T15:43:40.000000Z\",\"created_at\":\"2022-06-19T15:43:40.000000Z\",\"pelId\":1}','2022-06-19 14:43:40','2022-06-19 14:43:40'),(57,2,'kucip@gmail.com','mspelanggan','create','{\"compId\":\"2\",\"pelNama\":\"Abidatul\",\"pelUserId\":\"abidatul\",\"pelAlamat\":\"Jotang\",\"pelNoHp\":\"082340679856\",\"pelPeriodeBayar\":\"1\",\"pelPaket\":\"1\",\"pelAktif\":\"1\",\"updated_at\":\"2022-06-19T15:56:20.000000Z\",\"created_at\":\"2022-06-19T15:56:20.000000Z\",\"pelId\":2}','2022-06-19 14:56:20','2022-06-19 14:56:20'),(58,2,'kucip@gmail.com','role','create','{\"compId\":\"2\",\"roleNama\":\"User Level 1\",\"updated_at\":\"2022-06-19T15:58:00.000000Z\",\"created_at\":\"2022-06-19T15:58:00.000000Z\",\"roleId\":3}','2022-06-19 14:58:00','2022-06-19 14:58:00'),(59,2,'kucip@gmail.com','role','create','{\"compId\":\"2\",\"roleNama\":\"User Level 2\",\"updated_at\":\"2022-06-19T15:58:08.000000Z\",\"created_at\":\"2022-06-19T15:58:08.000000Z\",\"roleId\":4}','2022-06-19 14:58:08','2022-06-19 14:58:08'),(60,2,'haris@gmail.com','users','delete','{\"id\":1,\"name\":\"siapsehat\",\"email\":\"admin@siapsehat.com\",\"email_verified_at\":\"2022-06-19T03:32:45.000000Z\",\"password\":\"$2y$10$uBatLnuZ37l7Vbu3DOH4Ku8i1kqwvcr0VfkUV96bFJpgpvbX80hp6\",\"compId\":1,\"role\":1,\"created_at\":null,\"updated_at\":null}','2022-06-19 15:01:03','2022-06-19 15:01:03'),(61,2,'kucip@gmail.com','menu','update','{\"_token\":\"lb0IVsqlRjFwTaqlrtMT7kjYCCm9bnQ5RmykA4DW\",\"compId\":\"2\",\"menuNama\":\"Kirim WA Notifikasi\",\"menuRoute\":\"kirimwa\",\"menuIcon\":null,\"menuOrder\":\"3\",\"menuParent\":\"23\"}','2022-06-19 15:03:32','2022-06-19 15:03:32'),(62,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Create Tagihan Bulanan\",\"menuRoute\":\"createtagihan\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T16:04:06.000000Z\",\"created_at\":\"2022-06-19T16:04:06.000000Z\",\"menuId\":38}','2022-06-19 15:04:07','2022-06-19 15:04:07'),(63,2,'kucip@gmail.com','menu','update','{\"_token\":\"lb0IVsqlRjFwTaqlrtMT7kjYCCm9bnQ5RmykA4DW\",\"compId\":\"2\",\"menuNama\":\"Status Langganan\",\"menuRoute\":\"statusaktif\",\"menuIcon\":null,\"menuOrder\":\"6\",\"menuParent\":\"10\"}','2022-06-19 15:05:56','2022-06-19 15:05:56'),(64,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Pembayaran Pelanggan\",\"menuRoute\":\"pelangganbayar\",\"menuIcon\":null,\"menuOrder\":\"4\",\"menuParent\":\"23\",\"updated_at\":\"2022-06-19T16:11:52.000000Z\",\"created_at\":\"2022-06-19T16:11:52.000000Z\",\"menuId\":39}','2022-06-19 15:11:52','2022-06-19 15:11:52'),(65,2,'kucip@gmail.com','menu','update','{\"_token\":\"VBicxtDdqsoK9QgtI2NSopAx2qzunEnl6O95NI6b\",\"compId\":\"2\",\"menuNama\":\"Create Tagihan Bulanan\",\"menuRoute\":\"tagihan\",\"menuIcon\":null,\"menuOrder\":\"2\",\"menuParent\":\"23\"}','2022-06-26 13:00:46','2022-06-26 13:00:46'),(66,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":1,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPaket\":4,\"tagTagihan\":\"0\",\"created_at\":\"2022-06-30T02:38:35.000000Z\",\"updated_at\":\"2022-06-30T02:38:35.000000Z\"}','2022-06-30 01:58:02','2022-06-30 01:58:02'),(67,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":2,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":3,\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T02:45:52.000000Z\",\"updated_at\":\"2022-06-30T02:45:52.000000Z\"}','2022-06-30 01:58:05','2022-06-30 01:58:05'),(68,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":3,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":5,\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPaket\":4,\"tagTagihan\":\"200000\",\"created_at\":\"2022-06-30T02:46:12.000000Z\",\"updated_at\":\"2022-06-30T02:46:12.000000Z\"}','2022-06-30 01:58:08','2022-06-30 01:58:08'),(69,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":4,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":5,\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T02:56:39.000000Z\",\"updated_at\":\"2022-06-30T02:56:39.000000Z\"}','2022-06-30 01:58:12','2022-06-30 01:58:12'),(70,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":5,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":1,\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPaket\":4,\"tagTagihan\":\"200000\",\"created_at\":\"2022-06-30T02:57:55.000000Z\",\"updated_at\":\"2022-06-30T02:57:55.000000Z\"}','2022-06-30 01:58:15','2022-06-30 01:58:15'),(71,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":6,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":1,\"tagBulanNama\":\"\",\"tagTahun\":2021,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T02:58:23.000000Z\",\"updated_at\":\"2022-06-30T02:58:23.000000Z\"}','2022-06-30 02:53:45','2022-06-30 02:53:45'),(72,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":7,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T03:53:53.000000Z\",\"updated_at\":\"2022-06-30T03:53:53.000000Z\"}','2022-06-30 03:04:39','2022-06-30 03:04:39'),(73,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":8,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":7,\"tagBulanNama\":\"Juli\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPaket\":1,\"tagTagihan\":\"70000\",\"created_at\":\"2022-06-30T04:04:14.000000Z\",\"updated_at\":\"2022-06-30T04:04:14.000000Z\"}','2022-06-30 03:05:02','2022-06-30 03:05:02'),(74,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":9,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPelangganNama\":\"\",\"tagPaket\":1,\"tagTagihan\":\"70000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-06-30T04:04:47.000000Z\",\"updated_at\":\"2022-06-30T04:04:47.000000Z\"}','2022-07-01 14:12:23','2022-07-01 14:12:23'),(75,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"tC7cEBmFEW8Mc4LUi9YeK8epbkeVJXjkp02eVQtg\",\"compId\":\"2\",\"tagPelangganNama\":\"Abidatul\",\"tagPeriode\":\"1\",\"tagBulan\":\"7\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"0\"}','2022-07-01 14:37:06','2022-07-01 14:37:06'),(76,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"tC7cEBmFEW8Mc4LUi9YeK8epbkeVJXjkp02eVQtg\",\"compId\":\"2\",\"tagPelangganNama\":\"Abidatul\",\"tagPeriode\":\"1\",\"tagBulan\":\"7\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"100\"}','2022-07-01 15:00:02','2022-07-01 15:00:02'),(77,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"tC7cEBmFEW8Mc4LUi9YeK8epbkeVJXjkp02eVQtg\",\"compId\":\"2\",\"tagPelangganNama\":\"Abidatul\",\"tagPeriode\":\"1\",\"tagBulan\":\"7\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"0\"}','2022-07-01 15:05:15','2022-07-01 15:05:15'),(78,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":11,\"compId\":2,\"tagPeriode\":1,\"tagBulan\":7,\"tagBulanNama\":\"Juli\",\"tagTahun\":2022,\"tagPelanggan\":2,\"tagPelangganNama\":\"Abidatul\",\"tagPaket\":1,\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-01T15:14:28.000000Z\",\"updated_at\":\"2022-07-01T16:05:15.000000Z\"}','2022-07-05 09:37:20','2022-07-05 09:37:20'),(79,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":10,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":7,\"tagBulanNama\":\"Juli\",\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPelangganNama\":\"Nani\",\"tagPaket\":4,\"tagTagihan\":\"200000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-01T15:14:13.000000Z\",\"updated_at\":\"2022-07-01T15:14:13.000000Z\"}','2022-07-05 09:37:23','2022-07-05 09:37:23'),(80,2,'kucip@gmail.com','mspelanggan','update','{\"_token\":\"nOB9CrNy2DaWRtEYEcdbIC5i6Jn8L74y1RG3cQzt\",\"compId\":\"2\",\"pelNama\":\"Lubis\",\"pelUserId\":\"lubis\",\"pelAlamat\":\"Jotang\",\"pelNoHp\":\"082342632522\",\"pelPeriodeBayar\":\"2\",\"pelPaket\":\"1\",\"pelAktif\":\"2\"}','2022-07-05 09:40:22','2022-07-05 09:40:22'),(81,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":12,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":6,\"tagPelangganNama\":\"Lubis\",\"tagPaket\":0,\"tagTagihan\":null,\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-05T09:39:32.000000Z\",\"updated_at\":\"2022-07-05T09:39:32.000000Z\"}','2022-07-05 09:40:31','2022-07-05 09:40:31'),(82,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":13,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":5,\"tagPelangganNama\":\"Lasmini\",\"tagPaket\":1,\"tagTagihan\":\"70000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-05T09:39:32.000000Z\",\"updated_at\":\"2022-07-05T09:39:32.000000Z\"}','2022-07-05 09:40:46','2022-07-05 09:40:46'),(83,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":14,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":4,\"tagPelangganNama\":\"Julianti\",\"tagPaket\":3,\"tagTagihan\":\"180000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-05T09:39:32.000000Z\",\"updated_at\":\"2022-07-05T09:39:32.000000Z\"}','2022-07-05 09:40:48','2022-07-05 09:40:48'),(84,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":15,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":3,\"tagPelangganNama\":\"Wahid Wahyuddin\",\"tagPaket\":3,\"tagTagihan\":\"180000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-05T09:39:32.000000Z\",\"updated_at\":\"2022-07-05T09:39:32.000000Z\"}','2022-07-05 09:40:52','2022-07-05 09:40:52'),(85,2,'kucip@gmail.com','trtagihan','delete','{\"tagId\":16,\"compId\":2,\"tagPeriode\":2,\"tagBulan\":6,\"tagBulanNama\":\"Juni\",\"tagTahun\":2022,\"tagPelanggan\":1,\"tagPelangganNama\":\"Nani\",\"tagPaket\":4,\"tagTagihan\":\"200000\",\"tagBayar\":\"0\",\"tagSisa\":\"0\",\"created_at\":\"2022-07-05T09:39:32.000000Z\",\"updated_at\":\"2022-07-05T09:39:32.000000Z\"}','2022-07-05 09:40:54','2022-07-05 09:40:54'),(86,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Yudhi\",\"updated_at\":\"2022-07-05T14:29:01.000000Z\",\"created_at\":\"2022-07-05T14:29:01.000000Z\",\"bendId\":3}','2022-07-05 13:29:01','2022-07-05 13:29:01'),(87,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Haris\",\"updated_at\":\"2022-07-05T14:29:07.000000Z\",\"created_at\":\"2022-07-05T14:29:07.000000Z\",\"bendId\":4}','2022-07-05 13:29:08','2022-07-05 13:29:08'),(88,2,'kucip@gmail.com','msbendahara','create','{\"compId\":\"2\",\"bendNama\":\"Bank BRI\",\"updated_at\":\"2022-07-05T14:29:30.000000Z\",\"created_at\":\"2022-07-05T14:29:30.000000Z\",\"bendId\":5}','2022-07-05 13:29:30','2022-07-05 13:29:30'),(89,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"dBEeRiOuUc3kx93wyLzg2DntsLKyOgVdCBUZkRiJ\",\"compId\":\"2\",\"tagPelangganNama\":\"Julianti\",\"tagPeriode\":\"2\",\"tagBulan\":\"6\",\"tagTahun\":\"2022\",\"tagTagihan\":\"180000\",\"tagBayar\":\"180000\",\"tagSisa\":\"0\",\"tagBendahara\":\"3\",\"tagStatus\":\"1\",\"tagKeterangan\":\"-\"}','2022-07-05 13:41:33','2022-07-05 13:41:33'),(90,2,'kucip@gmail.com','menu','create','{\"compId\":\"2\",\"menuNama\":\"Cetak Pembayaran\",\"menuRoute\":\"cetakpembayaran\",\"menuIcon\":null,\"menuOrder\":\"7\",\"menuParent\":\"23\",\"updated_at\":\"2022-07-05T14:46:12.000000Z\",\"created_at\":\"2022-07-05T14:46:12.000000Z\",\"menuId\":40}','2022-07-05 13:46:12','2022-07-05 13:46:12'),(91,2,'kucip@gmail.com','trtagihan','update','{\"_token\":\"dBEeRiOuUc3kx93wyLzg2DntsLKyOgVdCBUZkRiJ\",\"compId\":\"2\",\"tagPelangganNama\":\"Lasmini\",\"tagPeriode\":\"2\",\"tagBulan\":\"6\",\"tagTahun\":\"2022\",\"tagTagihan\":\"70000\",\"tagBayar\":\"70000\",\"tagSisa\":\"0\",\"tagBendahara\":\"1\",\"tagStatus\":\"2\",\"tagKeterangan\":\"akan bayar\"}','2022-07-05 14:35:11','2022-07-05 14:35:11');
 /*!40000 ALTER TABLE `syslog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,24 +472,27 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `trtagihan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `trtagihan` (
-  `tagId` int(11) NOT NULL AUTO_INCREMENT,
-  `compId` int(11) NOT NULL,
-  `tagPeriode` int(11) NOT NULL,
-  `tagBulan` int(11) NOT NULL,
-  `tagBulanNama` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `tagTahun` int(11) NOT NULL,
-  `tagPelanggan` int(11) NOT NULL,
-  `tagPelangganNama` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `tagPaket` int(11) NOT NULL,
-  `tagTagihan` decimal(10,0) NOT NULL DEFAULT 0,
-  `tagBayar` decimal(11,0) NOT NULL DEFAULT 0,
-  `tagSisa` decimal(11,0) NOT NULL DEFAULT 0,
+  `tagId` int NOT NULL AUTO_INCREMENT,
+  `compId` int DEFAULT NULL,
+  `tagPeriode` int DEFAULT NULL,
+  `tagBulan` int DEFAULT NULL,
+  `tagBulanNama` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `tagTahun` int DEFAULT NULL,
+  `tagPelanggan` int DEFAULT NULL,
+  `tagPelangganNama` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_general_ci DEFAULT NULL,
+  `tagPaket` int DEFAULT NULL,
+  `tagTagihan` decimal(10,0) DEFAULT '0',
+  `tagBayar` decimal(11,0) DEFAULT '0',
+  `tagSisa` decimal(11,0) DEFAULT '0',
+  `tagBendahara` int NOT NULL DEFAULT '0',
+  `tagStatus` int DEFAULT NULL,
+  `tagKeterangan` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`tagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -500,7 +501,7 @@ CREATE TABLE `trtagihan` (
 
 LOCK TABLES `trtagihan` WRITE;
 /*!40000 ALTER TABLE `trtagihan` DISABLE KEYS */;
-INSERT INTO `trtagihan` VALUES (10,2,2,7,'Juli',2022,1,'Nani',4,200000,0,0,'2022-07-01 22:14:13','2022-07-01 22:14:13'),(11,2,1,7,'Juli',2022,2,'Abidatul',1,70000,70000,0,'2022-07-01 22:14:28','2022-07-01 23:05:15');
+INSERT INTO `trtagihan` VALUES (17,2,2,6,'Juni',2022,6,'Lubis',1,70000,0,0,0,NULL,NULL,'2022-07-05 16:41:07','2022-07-05 16:41:07'),(18,2,2,6,'Juni',2022,5,'Lasmini',1,70000,70000,0,1,2,'akan bayar','2022-07-05 16:41:07','2022-07-05 22:35:11'),(19,2,2,6,'Juni',2022,4,'Julianti',3,180000,180000,0,3,1,'-','2022-07-05 16:41:07','2022-07-05 21:41:32'),(20,2,2,6,'Juni',2022,3,'Wahid Wahyuddin',3,180000,0,0,0,NULL,NULL,'2022-07-05 16:41:07','2022-07-05 16:41:07'),(21,2,2,6,'Juni',2022,1,'Nani',4,200000,0,0,0,NULL,NULL,'2022-07-05 16:41:07','2022-07-05 16:41:07'),(22,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,0,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `trtagihan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -510,21 +511,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `compId` int(11) NOT NULL,
-  `role` int(11) NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `compId` int NOT NULL,
+  `role` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -546,4 +547,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-05 17:21:22
+-- Dump completed on 2022-07-06  0:15:58

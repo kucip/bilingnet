@@ -9,38 +9,21 @@ use Session;
 use Input;
 use App\Models\Transaksi\Pelanggan;
 use App\Models\Master\Periode;
+use App\Models\Master\Bendahara;
 
-class PelangganbayarController extends Controllermaster
+class CetakpembayaranController extends Controllermaster
 {
     public function __construct(){        
 
         $this->model=new Tagihan;
         $this->primaryKey='tagId';
-        $this->mainroute='pelangganbayar';
-        $this->route2='pelangganbayarsearch';
+        $this->mainroute='cetakpembayaran';
+        $this->route2='cetakpembayaran';
         $this->mandatory=array(
                                 'compId' => 'required',
                                 'tagBayar' => 'required',
                               );
         $this->grid=array(
-                        array(
-                                'label'=>'PERIODE',
-                                'field'=>'periodNama',
-                                'type'=>'text',
-                                'width'=>''
-                            ),
-                        array(
-                                'label'=>'BULAN',
-                                'field'=>'tagBulanNama',
-                                'type'=>'text',
-                                'width'=>''
-                            ),
-                        array(
-                                'label'=>'TAHUN',
-                                'field'=>'tagTahun',
-                                'type'=>'text',
-                                'width'=>''
-                            ),
                         array(
                                 'label'=>'NAMA',
                                 'field'=>'pelNama',
@@ -48,8 +31,8 @@ class PelangganbayarController extends Controllermaster
                                 'width'=>''
                             ),
                         array(
-                                'label'=>'PAKET',
-                                'field'=>'paketNama',
+                                'label'=>'BENDAHARA',
+                                'field'=>'bendNama',
                                 'type'=>'text',
                                 'width'=>''
                             ),
@@ -59,6 +42,13 @@ class PelangganbayarController extends Controllermaster
                                 'type'=>'number',
                                 'width'=>''
                             ),
+                        array(
+                                'label'=>'KONFIRMASI',
+                                'field'=>'tagBayar2',
+                                'type'=>'number',
+                                'width'=>''
+                            ),
+
                         array(
                                 'label'=>'PEMBAYARAN',
                                 'field'=>'tagBayar',
@@ -70,6 +60,12 @@ class PelangganbayarController extends Controllermaster
                                 'field'=>'tagSisa',
                                 'type'=>'number',
                                 'width'=>''
+                            ),
+                        array(
+                                'label'=>'KETERANGAN',
+                                'field'=>'tagKeterangan',
+                                'type'=>'text',
+                                'width'=>'20%'
                             ),
                      );
 
@@ -100,96 +96,7 @@ class PelangganbayarController extends Controllermaster
         $comboStatusBayar[]=(object) array("comboValue"=>"2","comboLabel"=>"Konfirmasi Bayar");
         $comboStatusBayar[]=(object) array("comboValue"=>"3","comboLabel"=>"Kurang Bayar");
 
-
-        $this->form=array(
-                        array(
-                                'label'=>'NAMA PELANGGAN',
-                                'field'=>'tagPelangganNama',
-                                'type' => 'text',
-                                'placeholder' => 'Nama Pelanggan',
-                                'keterangan' => '',
-                                'disable'=>'disabled="true"',
-                            ),  
-                        array(
-                                'label'=>'PERIODE',
-                                'field'=>'tagPeriode',
-                                'type' => 'autocomplete',
-                                'url' =>'comboperiode',
-                                'text' => '',
-                                'default' => 'Periode',
-                                'keterangan' => '',
-                                'disable'=>'disabled="true"',
-                            ),
-                        array(
-                                'label'=>'BULAN',
-                                'field'=>'tagBulan',
-                                'type'=>'combo',
-                                'combodata'=>(object)$comboBulan,
-                                'default'=>'Bulan',
-                                'keterangan'=>'',
-                                'disable'=>'disabled="true"',
-                            ),
-                        array(
-                                'label'=>'TAHUN',
-                                'field'=>'tagTahun',
-                                'type'=>'combo',
-                                'combodata'=>(object)$comboTahun,
-                                'default'=>'Tahun',
-                                'keterangan'=>'',
-                                'disable'=>'disabled="true"',
-                            ),
-                        array(
-                                'label'=>'TAGIHAN',
-                                'field'=>'tagTagihan',
-                                'type' => 'number',
-                                'placeholder' => 'Tagihan',
-                                'keterangan' => 'Jumlah Tagihan',
-                                'disable'=>'disabled="true"',
-                            ),  
-                        array(
-                                'label'=>'PEMBAYARAN',
-                                'field'=>'tagBayar',
-                                'type' => 'number',
-                                'placeholder' => 'Pembayaran',
-                                'keterangan' => 'Jumlah Yang Dibayarkan',
-                                'disable'=>'',
-                            ),  
-                        array(
-                                'label'=>'SISA PEMBAYARAN',
-                                'field'=>'tagSisa',
-                                'type' => 'number',
-                                'placeholder' => 'Sisa Pembayaran',
-                                'keterangan' => 'Isikan nilai jika pelanggan kurang bayar',
-                                'disable'=>'',
-                            ),  
-                        array(
-                                'label'=>'BENDAHARA',
-                                'field'=>'tagBendahara',
-                                'type' => 'autocomplete',
-                                'url' =>'combobendahara',
-                                'text' => '',
-                                'default' => 'Bendahara',
-                                'keterangan' => '',
-                                'disable'=>'',
-                            ),
-                        array(
-                                'label'=>'STATUS BAYAR',
-                                'field'=>'tagStatus',
-                                'type'=>'combo',
-                                'combodata'=>(object)$comboStatusBayar,
-                                'default'=>'Status',
-                                'keterangan'=>'',
-                                'disable'=>'',
-                            ),
-                        array(
-                                'label'=>'KETERANGAN',
-                                'field'=>'tagKeterangan',
-                                'type' => 'text',
-                                'placeholder' => 'Keterangan',
-                                'keterangan' => '',
-                                'disable'=>'',
-                            ),  
-                     );
+        $this->form=array();
     }
 
     public function index(){
@@ -205,13 +112,16 @@ class PelangganbayarController extends Controllermaster
             $compId = Session::get('compId');
             $compNama = Session::get('compNama');
             $logo = Session::get('logo');
-            $keyword=!empty($_GET['search'])?$_GET['search']:'';
             $filterPeriode=!empty($_GET['filterPeriode'])?$_GET['filterPeriode']:'';
             $filterBulan=!empty($_GET['filterBulan'])?$_GET['filterBulan']:'';
             $filterTahun=!empty($_GET['filterTahun'])?$_GET['filterTahun']:'';
-            
-            $search=trim($keyword.$filterPeriode.$filterBulan.$filterTahun);
+            $filterBendahara=!empty($_GET['filterBendahara'])?trim($_GET['filterBendahara']):0;
 
+            $search=trim($filterBendahara.$filterPeriode.$filterBulan.$filterTahun);
+
+            $totalBayar=0;
+            $totalKonfirmasi=0;
+            $totalSisa=0;
             if($search==''){
                 $listdata=$this->model
                             ->latest()
@@ -219,26 +129,53 @@ class PelangganbayarController extends Controllermaster
                             ->leftjoin('msperiode','periodId','=','tagPeriode')
                             ->leftjoin('mspaket','paketId','=','tagPaket')
                             ->leftjoin('mspelanggan','pelId','=','tagPelanggan')
-                            ->where('tagPelanggan','like','%'.$search.'%')
+                            ->where('tagPelanggan','=','%'.$search.'%')
                             ->where('trtagihan.compId','=',$compId)
                             ->orderby('tagId','asc')
-                            ->paginate(15);
+                            ->paginate(15);                
             }else{
+	            
+	            $txtbend=$filterBendahara;
+	            if($filterBendahara=='' or $filterBendahara==0){
+	            	$txtbend ='%';
+	            }
+
                 $listdata=$this->model
-                            ->select('trtagihan.*','periodNama','pelNama','paketNama')                            
+                            ->select('trtagihan.*','periodNama','pelNama','paketNama','bendNama','trtagihan.tagBayar as tagBayar2')                            
                             ->leftjoin('msperiode','periodId','=','tagPeriode')
                             ->leftjoin('mspaket','paketId','=','tagPaket')
                             ->leftjoin('mspelanggan','pelId','=','tagPelanggan')
-                            ->where('tagPelangganNama','like','%'.$keyword.'%')
+                            ->leftjoin('msbendahara','bendId','=','tagBendahara')
+                            ->where('tagBendahara','like',$txtbend)
                             ->where('tagPeriode','=',$filterPeriode)
                             ->where('tagBulan','=',$filterBulan)
                             ->where('tagTahun','=',$filterTahun)
                             ->where('trtagihan.compId','=',$compId)
                             ->orderby('tagId','asc')
-                            ->paginate(15);                
+                            ->paginate(2000);                
+
+                $idx=0;
+                foreach ($listdata as $key => $val) {
+                	$tagBayar=$val->tagBayar;
+                	$tagStatus=$val->tagStatus;
+                	$tagSisa=$val->tagSisa;
+                	$totalSisa = $totalSisa+$tagSisa;
+                	if($tagStatus==2){
+                		$tagBayar2=$tagBayar;
+                		$listdata[$idx]['tagBayar2']=$tagBayar;
+                		$listdata[$idx]['tagBayar'] =0;
+                		$totalKonfirmasi = $totalKonfirmasi+$tagBayar;
+                	}else{
+                		$listdata[$idx]['tagBayar2']=0;                		
+                		$totalBayar = $totalBayar+$tagBayar;
+                	}
+                	$idx++;
+                }
+
             }
 
             $comboPeriode=Periode::get(['periodId as comboValue','periodNama as comboLabel']);
+            $comboBendahara=Bendahara::get(['bendId as comboValue','bendNama as comboLabel']);
 
 
             $data = array(
@@ -257,16 +194,22 @@ class PelangganbayarController extends Controllermaster
                     'compId' => $compId,
                     'code'=>0,
                     'logo'=>$logo,
+                    'filterBendahara'=>$comboBendahara,
                     'filterPeriode'=>$comboPeriode,
                     'filterBulan'=>$this->filterBulan,
                     'filterTahun'=>$this->filterTahun,
-                    'vkeyword'=>$keyword,
                     'vperiode'=>$filterPeriode,
                     'vbulan'=>$filterBulan,
-                    'vtahun'=>$filterTahun
+                    'vtahun'=>$filterTahun,
+                    'vbendahara'=>$filterBendahara,
+                    'totalBayar'=>$totalBayar,
+                    'totalKonfirmasi'=>$totalKonfirmasi,
+                    'totalSisa'=>$totalSisa
                     );
-            return view('transaksi.bayar',$data)->with('data', $data);
+            return view('transaksi.cetakbayar',$data)->with('data', $data);
         }
     }
+
+
 
 }
