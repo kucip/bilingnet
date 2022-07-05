@@ -86,7 +86,7 @@ class TagihanController extends Controllermaster
 				                'type' => 'autocomplete',
 				                'url' =>'comboperiode',
 				                'text' => '',
-				                'default' => 'Pilih Status',
+				                'default' => 'Pilih Periode',
 				                'keterangan' => ''
                             ),
                         array(
@@ -102,7 +102,7 @@ class TagihanController extends Controllermaster
                                 'field'=>'tagTahun',
                                 'type'=>'combo',
                                 'combodata'=>(object)$comboTahun,
-                                'default'=>'Pilih Bulan',
+                                'default'=>'Pilih Tahun',
                                 'keterangan'=>''
                             ),
                      );
@@ -197,6 +197,7 @@ class TagihanController extends Controllermaster
                 $data->tagBulanNama = $this->namaBulan($bulan);
                 $data->tagTahun = $tahun;
                 $data->tagPelanggan = $pelId;
+                $data->tagPelangganNama = $pelNama;
                 $data->tagPaket = $pelPaket;
                 $data->tagTagihan = $pelTagihan;
                 $data->save();

@@ -42,6 +42,8 @@ Route::resource('statusaktif', App\Http\Controllers\Master\StatusaktifController
 Route::resource('datapelanggan', App\Http\Controllers\Transaksi\PelangganController::class);
 Route::resource('tagihan', App\Http\Controllers\Transaksi\TagihanController::class);
 Route::post('createtagihan', [App\Http\Controllers\Transaksi\TagihanController::class,'createTagihan']);
+Route::resource('pelangganbayar', App\Http\Controllers\Transaksi\PelangganbayarController::class);
+Route::post('pelangganbayarsearch', [App\Http\Controllers\Transaksi\PelangganbayarController::class,'searching']);
 
 // Route Autocomplete
 Route::resource('comboparent', App\Http\Controllers\Combo\Master\ComboparentController::class);
