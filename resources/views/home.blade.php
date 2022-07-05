@@ -16,7 +16,7 @@
 			</div>
 
 			<div class="card-body">
-				
+				<img src="{{url('/')}}/assets/images/dash1.jpg" class="img-responsive" style="max-height: 420px;">				
 			</div>
 		</div>
 		<!-- /basic layout -->
