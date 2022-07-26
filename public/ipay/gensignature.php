@@ -4,14 +4,14 @@
     $va           = '0000005234729998'; //get on iPaymu dashboard
     $secret       = 'SANDBOXB4CEEAE0-BADE-4EC1-B900-9FF754400CFA-20220227125606'; //get on iPaymu dashboard
 
-    $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //url
-    $method       = 'POST'; //method
+    $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct';
+    $method       = 'POST';
 
 
     $body = array(
             "name"=>"Buyer",
             "phone"=>"081999501092",
-            "email"=>"buyer@mail.com",
+            "email"=>"wahyu@mail.com",
             "amount"=>"10000",
             "notifyUrl"=>"https://mywebsite.com",
             "expired"=>"24",

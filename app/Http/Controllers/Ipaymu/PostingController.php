@@ -234,18 +234,16 @@ class PostingController extends Controllermaster
     public function update(Request $request, $id){
         // return $request;
 
-
         $va           = '0000005234729998'; //get on iPaymu dashboard
         $secret       = 'SANDBOXB4CEEAE0-BADE-4EC1-B900-9FF754400CFA-20220227125606'; //get on iPaymu dashboard
 
-        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //url
-        $method       = 'POST'; //method
-
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; 
+        $method       = 'POST';
 
         $body = array(
                 "name"=>$request->tagPelangganNama,
                 "phone"=>$request->pelNoHp,
-                "email"=>"",
+                "email"=>"wahyu.budiman@gmail.com",
                 "amount"=>$request->tagTagihan,
                 "notifyUrl"=>"http://biling-wifi.optimasolution.co.id/payupdate",
                 "expired"=>"24",
@@ -254,18 +252,16 @@ class PostingController extends Controllermaster
                 "referenceId"=>"1",
                 "paymentMethod"=>"va",
                 "paymentChannel"=>"bca",
-                "product"=>array(),
-                "qty"=>array(),
-                "price"=>array(),
-                "weight"=>array(),
-                "width"=>array(),
-                "height"=>array(),
-                "length"=>array(),
-                "deliveryArea"=>"",
-                "deliveryAddress"=>""
+                "product"=>['produk 1'],
+                "qty"=>['1'],
+                "price"=>['1000'],
+                "weight"=>['1'],
+                "width"=>['1'],
+                "height"=>['1'],
+                "length"=>['1'],
+                "deliveryArea"=>"12345",
+                "deliveryAddress"=>"jakarta"
             );
-
-
 
         //Generate Signature
         $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
@@ -283,13 +279,10 @@ class PostingController extends Controllermaster
             'signature: ' . $signature,
             'timestamp: ' . $timestamp
         );
-
         curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
         curl_setopt($ch, CURLOPT_POST, count($body));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
-
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);

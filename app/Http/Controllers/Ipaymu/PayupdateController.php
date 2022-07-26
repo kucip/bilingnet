@@ -16,13 +16,19 @@ class PayupdateController extends Controllermaster
         $this->primaryKey='tagId';
     }
 
-    public function updatepay(){
+    public function updatepay(Request $request){
 
-        $trx_id       =$_POST['trx_id'];
-        $status       =$_POST['status'];
-        $status_code  =$_POST['status_code'];
-        $sid          =$_POST['sid'];
-        $reference_id =$_POST['reference_id'];
+        // $trx_id       =$_POST['trx_id'];
+        // $status       =$_POST['status'];
+        // $status_code  =$_POST['status_code'];
+        // $sid          =$_POST['sid'];
+        // $reference_id =$_POST['reference_id'];
+
+        $trx_id       =$request->trx_id;
+        $status       =$request->status;
+        $status_code  =$request->status_code;
+        $sid          =$request->sid;
+        $reference_id =$request->reference_id;
 
         $data=array(
                         "payStatus"=>$status,
