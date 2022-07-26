@@ -135,6 +135,14 @@ class PostingController extends Controllermaster
                                 'disable'=>'disabled="true"',
                             ),  
                         array(
+                                'label'=>'NOHP',
+                                'field'=>'pelNoHp',
+                                'type' => 'hidden',
+                                'placeholder' => '',
+                                'keterangan' => '',
+                                'disable'=>'disabled="true"',
+                            ),  
+                        array(
                                 'label'=>'KETERANGAN',
                                 'field'=>'tagKeterangan',
                                 'type' => 'text',
@@ -168,7 +176,7 @@ class PostingController extends Controllermaster
             if($search==''){
                 $listdata=$this->model
                             ->latest()
-                            ->select('trtagihan.*','periodNama','pelNama','paketNama')                            
+                            ->select('trtagihan.*','periodNama','pelNama','pelNoHp','paketNama')                            
                             ->leftjoin('msperiode','periodId','=','tagPeriode')
                             ->leftjoin('mspaket','paketId','=','tagPaket')
                             ->leftjoin('mspelanggan','pelId','=','tagPelanggan')
@@ -178,7 +186,7 @@ class PostingController extends Controllermaster
                             ->paginate(15);
             }else{
                 $listdata=$this->model
-                            ->select('trtagihan.*','periodNama','pelNama','paketNama')                            
+                            ->select('trtagihan.*','periodNama','pelNoHp','pelNama','paketNama')                            
                             ->leftjoin('msperiode','periodId','=','tagPeriode')
                             ->leftjoin('mspaket','paketId','=','tagPaket')
                             ->leftjoin('mspelanggan','pelId','=','tagPelanggan')
@@ -224,7 +232,73 @@ class PostingController extends Controllermaster
 
 
     public function update(Request $request, $id){
-        return $request;
+        // return $request;
+
+
+        $va           = '0000005234729998'; //get on iPaymu dashboard
+        $secret       = 'SANDBOXB4CEEAE0-BADE-4EC1-B900-9FF754400CFA-20220227125606'; //get on iPaymu dashboard
+
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //url
+        $method       = 'POST'; //method
+
+
+        $body = array(
+                "name"=>$request->tagPelangganNama,
+                "phone"=>$request->pelNoHp,
+                "email"=>"",
+                "amount"=>$request->tagTagihan,
+                "notifyUrl"=>"http://biling-wifi.optimasolution.co.id/payupdate",
+                "expired"=>"24",
+                "expiredType"=>"hours",
+                "comments"=>$request->tagKeterangan,
+                "referenceId"=>"1",
+                "paymentMethod"=>"va",
+                "paymentChannel"=>"bca",
+                "product"=>array(),
+                "qty"=>array(),
+                "price"=>array(),
+                "weight"=>array(),
+                "width"=>array(),
+                "height"=>array(),
+                "length"=>array(),
+                "deliveryArea"=>"",
+                "deliveryAddress"=>""
+            );
+
+
+
+        //Generate Signature
+        $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+        $requestBody  = strtolower(hash('sha256', $jsonBody));
+        $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $secret;
+        $signature    = hash_hmac('sha256', $stringToSign, $secret);
+        $timestamp    = Date('YmdHis');
+        //End Generate Signature
+
+        $ch = curl_init($url);
+        $headers = array(
+            'Accept: application/json',
+            'Content-Type: application/json',
+            'va: ' . $va,
+            'signature: ' . $signature,
+            'timestamp: ' . $timestamp
+        );
+
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($ch, CURLOPT_POST, count($body));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $err = curl_error($ch);
+        $ret = curl_exec($ch);
+        curl_close($ch);
+
+        return $ret;
+
     }
 
 

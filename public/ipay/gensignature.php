@@ -7,15 +7,6 @@
     $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //url
     $method       = 'POST'; //method
 
-    //Request Body//
-    // $body['product']    = array('headset', 'softcase');
-    // $body['qty']        = array('1', '3');
-    // $body['price']      = array('100000', '20000');
-    // $body['returnUrl']  = 'https://optimasolution.co.id/ipay/thankyou.php';
-    // $body['cancelUrl']  = 'https://optimasolution.co.id/ipay/cancel.php';
-    // $body['notifyUrl']  = 'https://optimasolution.co.id/ipay/notify.php';
-    //End Request Body//
-
 
     $body = array(
             "name"=>"Buyer",
