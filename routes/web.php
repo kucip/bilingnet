@@ -53,3 +53,8 @@ Route::resource('comboperiode', App\Http\Controllers\Combo\Master\ComboperiodeCo
 Route::resource('combopaket', App\Http\Controllers\Combo\Master\CombopaketController::class);
 Route::resource('combostatus', App\Http\Controllers\Combo\Master\CombostatusController::class);
 Route::resource('combobendahara', App\Http\Controllers\Combo\Master\CombobendaharaController::class);
+
+//ipaymu
+Route::resource('postingtagihan', App\Http\Controllers\Ipaymu\PostingController::class);
+Route::post('payupdate', [App\Http\Controllers\Ipaymu\PayupdateController::class,'updatepay']);
+
